@@ -1,0 +1,6 @@
+#compiled files
+*.class
+
+#folders
+out
+.idea/
