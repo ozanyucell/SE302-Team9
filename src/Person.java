@@ -6,13 +6,22 @@ public class Person{
     private String bornDate;
     private String about;
 
-    public Person() {
+    Person() {
         name = "Unknown";
         surname = "Unknown";
         age = 0;
         gender = "Unknown";
         bornDate = "Unknown";
         about = "No information.";
+    }
+
+    Person(String name, String surname, int age, String gender, String bornDate, String about){
+        setName(name);
+        setSurname(surname);
+        setAge(age);
+        setGender(gender);
+        setBornDate(bornDate);
+        setAbout(about);
     }
 
     public void setName(String name) { this.name = name; }
@@ -38,4 +47,15 @@ public class Person{
     public String getBornDate() { return bornDate; }
 
     public String getAbout() { return about; }
+
+    public void printPerson(){
+        System.out.println("-----------------------------");
+        System.out.println("Name: " + getName());
+        System.out.println("Surname: " + getSurname());
+        System.out.println("Age: " + getAge());
+        System.out.println("Gender: " + getGender());
+        System.out.println("Born Date: " + getBornDate());
+        System.out.println("\nAbout\n" + getAbout());
+        System.out.println("-----------------------------");
+    }
 }
