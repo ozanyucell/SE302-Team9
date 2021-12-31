@@ -20,7 +20,7 @@ public class Tree {
 
     //public void setFamilyMember(Person familyMember) { this.familyMember = familyMember; }
 
-    public void setMembers(ArrayList<Person> members) { this.members = members; }
+    public void setMembers(Person member) { this.members.add(member); }
 
     public void setAbout(String about) { this.about = about; }
 
@@ -32,6 +32,7 @@ public class Tree {
 
     public String getAbout() { return about; }
 
+    //for testing
     public void printTree() {
         System.out.println("-----------------------------");
         System.out.println("Family name: " + getFamilyName());

@@ -48,6 +48,7 @@ public class Person{
 
     public String getAbout() { return about; }
 
+    //for testing
     public void printPerson(){
         System.out.println("-----------------------------");
         System.out.println("Name: " + getName());
