@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Tree {
     private String familyName;
     //private Person familyMember;
-    private ArrayList<Person> members;
+    private ArrayList<Person> members = new ArrayList<Person>();
     private String about;
 
     Tree() {
@@ -20,7 +20,7 @@ public class Tree {
 
     //public void setFamilyMember(Person familyMember) { this.familyMember = familyMember; }
 
-    public void setMembers(Person member) { this.members.add(member); }
+    public void setMembers(ArrayList<Person> members) { this.members = members; }
 
     public void setAbout(String about) { this.about = about; }
 

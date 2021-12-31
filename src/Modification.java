@@ -2,23 +2,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Modification {
-    private ArrayList<Tree> trees;
+    protected ArrayList<Tree> trees = new ArrayList<Tree>();
+    private ArrayList<Person> tempFamilyMembers = new ArrayList<Person>();
 
     public void addTree(){
         String familyName, about;
         Scanner treeScan = new Scanner(System.in);
 
-        System.out.print("Name: ");
+        System.out.print("Family Name: ");
         familyName = treeScan.next();
-        System.out.print("\nSurname: ");
+        System.out.print("About Family: ");
         about = treeScan.next();
 
+        System.out.println();
         System.out.print("How many members?: ");  //this part is
         int memberCount = treeScan.nextInt();     //for testing,
         System.out.println();                     //can be removed with GUI
 
         for(int x=0; x < memberCount; x++){
-            System.out.println();
+
             addMember();
             System.out.println();
         }
@@ -34,21 +36,23 @@ public class Modification {
 
         System.out.print("Name: ");
         name = memberScan.next();
-        System.out.print("\nSurname: ");
+        System.out.print("Surname: ");
         surname = memberScan.next();
-        System.out.print("\nAge: ");
+        System.out.print("Age: ");
         age = memberScan.nextInt();
-        System.out.print("\nGender: ");
+        System.out.print("Gender: ");
         gender = memberScan.next();
-        System.out.print("\nBorn Date: ");
+        System.out.print("Born Date: ");
         bornDate = memberScan.next();
-        System.out.print("\nAbout: ");
+        System.out.print("About: ");
         about = memberScan.next();
 
         Person newMember = new Person(name, surname, age, gender, bornDate, about);
 
+        tempFamilyMembers.add(newMember);
+
         Tree tree = new Tree();
-        tree.setMembers(newMember);
+        tree.setMembers(tempFamilyMembers);
     }
 
     public void editTree(){}
