@@ -6,5 +6,6 @@ public class Main {
         Tree tree = new Tree();
         tree.printTree();
         person.printPerson();
+
     }
 }
