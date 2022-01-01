@@ -11,7 +11,20 @@ public class Main {
         Tree tree = new Tree();
 
         modification.addTree();
-        modification.trees.get(0).printTree();
+
+        System.out.println(modification.trees);
+        System.out.println(modification.tempFamilyMembers);
+
+        //modification.trees.get(0).printTree();
+
+        System.out.println();
+        System.out.println(tree.getMembers());
+        System.out.println(tree.getMembers() != null);
+        System.out.println(tree.getMembers().size());
+
+        modification.tempFamilyMembers.get(0).printPerson();
+        modification.tempFamilyMembers.get(1).printPerson();
+
         tree.getMembers().get(0).printPerson();
 
     }

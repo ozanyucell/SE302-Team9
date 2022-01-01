@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Modification {
     protected ArrayList<Tree> trees = new ArrayList<Tree>();
-    private ArrayList<Person> tempFamilyMembers = new ArrayList<Person>();
+    protected ArrayList<Person> tempFamilyMembers = new ArrayList<Person>();
 
     public void addTree(){
         String familyName, about;
