@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Person{
     private String name;
     private String surname;
@@ -5,14 +7,15 @@ public class Person{
     private String gender;
     private String bornDate;
     private String about;
+    private Relation relation;
 
     Person() {
-        name = "Unknown";
-        surname = "Unknown";
-        age = 0;
-        gender = "Unknown";
-        bornDate = "Unknown";
-        about = "No information.";
+        setName("Unknown");
+        setSurname("Unknown");
+        setAge(0);
+        setGender("Unknown");
+        setBornDate("Unknown");
+        setAbout("No information.");
     }
 
     Person(String name, String surname, int age, String gender, String bornDate, String about){
@@ -22,6 +25,7 @@ public class Person{
         setGender(gender);
         setBornDate(bornDate);
         setAbout(about);
+
     }
 
     public void setName(String name) { this.name = name; }
@@ -36,6 +40,10 @@ public class Person{
 
     public void setAbout(String about) { this.about = about; }
 
+    public void setRelation(Person mother, Person father, Person partner, ArrayList<Person> children) {
+        this.relation = new Relation(mother, father, partner, children);
+    }
+
     public String getName() { return name; }
 
     public String getSurname() { return surname; }
@@ -47,6 +55,8 @@ public class Person{
     public String getBornDate() { return bornDate; }
 
     public String getAbout() { return about; }
+
+    public Relation getRelation() { return relation; }
 
     //for testing
     public void printPerson(){

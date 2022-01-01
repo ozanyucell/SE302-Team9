@@ -4,9 +4,10 @@ public class Relation {
     private Person mother, father, partner;
     private ArrayList<Person> children;
 
-    Relation(Person mother, Person father, ArrayList<Person> children){
+    Relation(Person mother, Person father, Person partner, ArrayList<Person> children){
         setMother(mother);
         setFather(father);
+        setPartner(partner);
         setChildren(children);
     }
 
@@ -25,5 +26,4 @@ public class Relation {
     public Person getPartner() { return partner; }
 
     public ArrayList<Person> getChildren() { return children; }
-
 }
