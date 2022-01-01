@@ -2,10 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Modification {
-    protected ArrayList<Tree> trees = new ArrayList<Tree>();
-    protected ArrayList<Person> tempFamilyMembers = new ArrayList<Person>();
+    private static ArrayList<Tree> trees = new ArrayList<Tree>();
 
-    public void addTree(){
+    public static ArrayList<Tree> getTrees() { return trees; }
+
+    public static Tree addTree(){
         String familyName, about;
         Scanner treeScan = new Scanner(System.in);
 
@@ -19,17 +20,19 @@ public class Modification {
         int memberCount = treeScan.nextInt();     //for testing,
         System.out.println();                     //can be removed with GUI
 
-        for(int x=0; x < memberCount; x++){
+        Tree newTree = new Tree(familyName, about);
 
-            addMember();
+        for(int x=0; x < memberCount; x++){
+            addMember(newTree);
             System.out.println();
         }
 
-        Tree newTree = new Tree(familyName, about);
         trees.add(newTree);
+
+        return newTree;
     }
 
-    public void addMember(){
+    public static void addMember(Tree newTree){
         String name, surname, gender, bornDate, about;
         int age;
         Scanner memberScan = new Scanner(System.in);
@@ -49,14 +52,11 @@ public class Modification {
 
         Person newMember = new Person(name, surname, age, gender, bornDate, about);
 
-        tempFamilyMembers.add(newMember);
-
-        Tree tree = new Tree();
-        tree.setMembers(tempFamilyMembers);
+        newTree.setMembers(newMember);
     }
 
-    public void editTree(){}
-    public void deleteTree(){}
-    public void mergeTrees(){}
+    public static void editTree(){}
+    public static void deleteTree(){}
+    public static void mergeTrees(){}
 
 }

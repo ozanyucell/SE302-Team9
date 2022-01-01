@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Tree {
     private String familyName;
-    //private Person familyMember;
     private ArrayList<Person> members = new ArrayList<Person>();
     private String about;
 
@@ -18,17 +17,11 @@ public class Tree {
 
     public void setFamilyName(String familyName) { this.familyName = familyName; }
 
-    //public void setFamilyMember(Person familyMember) { this.familyMember = familyMember; }
-
-    public void setMembers(ArrayList<Person> tempMembers) {
-        this.members.addAll(tempMembers);
-    }
+    public void setMembers(Person member) { this.members.add(member); }
 
     public void setAbout(String about) { this.about = about; }
 
     public String getFamilyName() { return familyName; }
-
-    //public Person getFamilyMember() { return familyMember; }
 
     public ArrayList<Person> getMembers() { return this.members; }
 
