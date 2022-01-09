@@ -18,7 +18,7 @@ public class Modification {
         System.out.println();
         System.out.print("How many members?: ");  //this part is
         int memberCount = treeScan.nextInt();     //for testing,
-        System.out.println();                     //can be removed with GUI
+        System.out.println();                     //can be replaced with GUI
 
         Tree newTree = new Tree(familyName, about);
 
