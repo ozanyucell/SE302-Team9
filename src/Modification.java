@@ -1,9 +1,11 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Modification {
     private static ArrayList<Tree> trees = new ArrayList<Tree>();
+    static HashSet<String> fileNames = new HashSet<String>();
 
     public static ArrayList<Tree> getTrees() { return trees; }
 
@@ -56,19 +58,39 @@ public class Modification {
         newTree.setMembers(newMember);
     }
 
+    public static void setFileNames(HashSet<String> fileNames) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("..\\test_area\\ftg_container\\file_names.txt")));
+        String line = reader.readLine();
+
+        while(line!=null) {
+            fileNames.add(line);
+            line = reader.readLine();
+        }
+    }
+
     public static void writeTree(Tree tree) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\ozany\\Desktop\\"+ tree.getFamilyName() +".ftg"));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("..\\test_area\\ftg_container\\file_names.txt", true)));
+        writer.append(tree.getFamilyName());
+        writer.newLine();
+        writer.flush();
+
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("..\\test_area\\ftg_container\\"+ tree.getFamilyName() +".tree"));
         oos.writeObject(tree);
         oos.close();
     }
 
-    public static void readTree(Tree tree) throws IOException, ClassNotFoundException { // NOT WORKING PROPERLY
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\ozany\\Desktop\\"+ tree.getFamilyName() +".ftg"));
-        tree = (Tree) ois.readObject();
-        ois.close();
+    public static void readTree(Tree tree) throws IOException, ClassNotFoundException {
+        for (String fileName : fileNames){
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("..\\test_area\\ftg_container\\" + fileName + ".tree"));
+            tree = (Tree) ois.readObject();
+            trees.add(tree);
+            ois.close();
+        }
     }
 
     public static void editTree(){}
+
     public static void deleteTree(){}
+
     public static void mergeTrees(){}
 }
