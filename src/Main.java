@@ -4,14 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-        // test addTree
-        //Tree newTree = Modification.addTree();
-
-        //System.out.println();
-        //System.out.println(newTree.getMembers());
-
+    public static void main(String[] args) {
         gui();
     }
 
