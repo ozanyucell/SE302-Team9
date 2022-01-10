@@ -59,11 +59,12 @@ public class Modification {
         oos.close();
     }
 
-    public static Tree pullTree(Tree tree) throws IOException, ClassNotFoundException {
+    public static Tree pullTree() throws IOException, ClassNotFoundException {
+        Tree importedTree;
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
-        tree = (Tree) ois.readObject();
+        importedTree = (Tree) ois.readObject();
         ois.close();
-        return tree;
+        return importedTree;
     }
 
     public static void editTree(){}

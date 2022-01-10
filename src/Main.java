@@ -53,7 +53,7 @@ public class Main {
                     if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
                         Tree tree = new Tree();
                         Modification.filePath = fileChooser.getSelectedFile().getAbsolutePath();
-                        try { Modification.pullTree(tree); }
+                        try { tree = Modification.pullTree(); }
                         catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
                         tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
