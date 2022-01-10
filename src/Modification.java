@@ -59,7 +59,7 @@ public class Modification {
     }
 
     public static void setFileNames(HashSet<String> fileNames) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("..\\test_area\\ftg_container\\file_names.txt")));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("..\\SE302-Team9\\ftg_container\\file_names.txt")));
         String line = reader.readLine();
 
         while(line!=null) {
@@ -69,19 +69,19 @@ public class Modification {
     }
 
     public static void writeTree(Tree tree) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("..\\test_area\\ftg_container\\file_names.txt", true)));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("..\\SE302-Team9\\ftg_container\\file_names.txt", true)));
         writer.append(tree.getFamilyName());
         writer.newLine();
         writer.flush();
 
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("..\\test_area\\ftg_container\\"+ tree.getFamilyName() +".tree"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("..\\SE302-Team9\\ftg_container\\"+ tree.getFamilyName() +".tree"));
         oos.writeObject(tree);
         oos.close();
     }
 
     public static void readTree(Tree tree) throws IOException, ClassNotFoundException {
         for (String fileName : fileNames){
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("..\\test_area\\ftg_container\\" + fileName + ".tree"));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("..\\SE302-Team9\\ftg_container\\" + fileName + ".tree"));
             tree = (Tree) ois.readObject();
             trees.add(tree);
             ois.close();
