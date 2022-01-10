@@ -1,17 +1,16 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.lang.management.MonitorInfo;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         // test addTree
-        Tree newTree = Modification.addTree();
+        //Tree newTree = Modification.addTree();
 
-        System.out.println();
-        System.out.println(newTree.getMembers());
+        //System.out.println();
+        //System.out.println(newTree.getMembers());
 
         gui();
     }
@@ -19,17 +18,12 @@ public class Main {
     public static void gui(){
         int width = 875, height = 540;
 
-        JFrame frame = new JFrame("Family Tree Generator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame();
         frame.pack();
-        frame.setSize(width, height);
-        frame.setResizable(false); // WITH THIS, PAGE IS NOT RESIZABLE ANYMORE
+        frame.setSize(width,height);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         frame.setLayout(null);
-
-        JPanel panel = new JPanel();
-        panel.setBounds(10, 40, width, height);
-        frame.add(panel);
-        panel.setLayout(null);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBounds(0, 0, width, 30);
@@ -41,31 +35,35 @@ public class Main {
         JMenu menuButton2 = new JMenu("Help");
         menuBar.add(menuButton2);
 
-        ArrayList<String> familyNames = new ArrayList<>();
+        JButton openButton = new JButton("Open Tree");
+        openButton.setBounds(170,150,200,200);
+        frame.add(openButton);
 
-        for (int i = 0; i < Modification.getTrees().size(); i++){
-            familyNames.add(Modification.getTrees().get(i).getFamilyName());
-        }
+        JButton createButton = new JButton("Create Tree");
+        createButton.setBounds(500,150,200,200);
+        frame.add(createButton);
 
-        int positionX = 10, positionY = 30;
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        for (String familyName : familyNames) {
-            JButton newButton = new JButton(familyName);
-            if(frame.getHeight() - positionX+80 < 50) {
-                positionX = 10;
-                newButton.setBounds(positionX + 90, positionY+90, 80, 80);
-                positionY += 90;
+
             }
-            else {
-                newButton.setBounds(positionX + 90, positionY, 80, 80);
-            }
-            positionX += 90;
-            panel.add(newButton);
-        }
+        });
 
-        JButton newButton = new JButton("+");
-        newButton.setBounds(positionX + 90, positionY, 80, 80);
-        panel.add(newButton);
+        createButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame newFrame = new JFrame();
+                newFrame.pack();
+                newFrame.setSize(width,height);
+
+                newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                newFrame.setVisible(true);
+                frame.setVisible(false);
+                frame.dispose();
+            }
+        });
 
         frame.setVisible(true);
     }
