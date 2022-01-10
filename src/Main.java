@@ -46,8 +46,23 @@ public class Main {
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Choose a .tree file");
 
+                if (fileChooser.showOpenDialog(openButton) == JFileChooser.APPROVE_OPTION){
+                    if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
+                        Tree tree = new Tree();
+                        Modification.filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                        try { Modification.pullTree(tree); }
+                        catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
+                        tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
+                    }
+
+                    else {
+                        JOptionPane.showMessageDialog(frame, "Please select a .tree file.");
+                    }
+                }
             }
         });
 
