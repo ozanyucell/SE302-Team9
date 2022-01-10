@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Modification {
     private static ArrayList<Tree> trees = new ArrayList<Tree>();
     static HashSet<String> fileNames = new HashSet<String>();
+    static String filePath = "Unknown";
 
     public static ArrayList<Tree> getTrees() { return trees; }
 
