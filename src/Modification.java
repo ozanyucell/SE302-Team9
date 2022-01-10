@@ -1,16 +1,10 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Modification {
-    private static ArrayList<Tree> trees = new ArrayList<Tree>();
-    static HashSet<String> fileNames = new HashSet<String>();
     static String filePath = "Unknown";
 
-    public static ArrayList<Tree> getTrees() { return trees; }
-
-    public static Tree addTree(){
+    public static Tree createTree() throws IOException {
         String familyName, about;
         Scanner treeScan = new Scanner(System.in);
 
@@ -27,16 +21,16 @@ public class Modification {
         Tree newTree = new Tree(familyName, about);
 
         for(int x=0; x < memberCount; x++){
-            addMember(newTree);
+            createMember(newTree);
             System.out.println();
         }
-
-        trees.add(newTree);
+        String createFilePath = "..\\SE302-Team9\\tree_container\\" + familyName + ".tree";
+        pushTree(newTree, createFilePath);
 
         return newTree;
     }
 
-    public static void addMember(Tree newTree){
+    public static void createMember(Tree newTree){
         String name, surname, gender, bornDate, about;
         int age;
         Scanner memberScan = new Scanner(System.in);
@@ -59,8 +53,28 @@ public class Modification {
         newTree.setMembers(newMember);
     }
 
+    public static void pushTree(Tree tree, String createPath) throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(createPath));
+        oos.writeObject(tree);
+        oos.close();
+    }
+
+    public static Tree pullTree(Tree tree) throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
+        tree = (Tree) ois.readObject();
+        ois.close();
+        return tree;
+    }
+
+    public static void editTree(){}
+
+    public static void deleteTree(){}
+
+    public static void mergeTrees(){}
+
+    /*
     public static void setFileNames(HashSet<String> fileNames) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("..\\SE302-Team9\\ftg_container\\file_names.txt")));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("..\\SE302-Team9\\tree_container\\file_names.txt")));
         String line = reader.readLine();
 
         while(line!=null) {
@@ -70,28 +84,23 @@ public class Modification {
     }
 
     public static void writeTree(Tree tree) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("..\\SE302-Team9\\ftg_container\\file_names.txt", true)));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("..\\SE302-Team9\\tree_container\\file_names.txt", true)));
         writer.append(tree.getFamilyName());
         writer.newLine();
         writer.flush();
 
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("..\\SE302-Team9\\ftg_container\\"+ tree.getFamilyName() +".tree"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("..\\SE302-Team9\\tree_container\\"+ tree.getFamilyName() +".tree"));
         oos.writeObject(tree);
         oos.close();
     }
 
     public static void readTree(Tree tree) throws IOException, ClassNotFoundException {
         for (String fileName : fileNames){
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("..\\SE302-Team9\\ftg_container\\" + fileName + ".tree"));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("..\\SE302-Team9\\tree_container\\" + fileName + ".tree"));
             tree = (Tree) ois.readObject();
             trees.add(tree);
             ois.close();
         }
     }
-
-    public static void editTree(){}
-
-    public static void deleteTree(){}
-
-    public static void mergeTrees(){}
+    */
 }
