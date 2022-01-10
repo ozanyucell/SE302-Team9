@@ -65,11 +65,39 @@ public class Main {
                 JFrame newFrame = new JFrame();
                 newFrame.pack();
                 newFrame.setSize(width,height);
-
                 newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 newFrame.setVisible(true);
+                newFrame.setLayout(null);
+                newFrame.setTitle("Create Tree");
                 frame.setVisible(false);
                 frame.dispose();
+                JTextField textField;
+                JTextField textField2;
+                JLabel ctLabel = new JLabel("CREATE TREE");
+                ctLabel.setBounds(80, 40, 100, 15);
+                newFrame.add(ctLabel);
+
+                JLabel ctLabel1 = new JLabel("Family Name:");
+                ctLabel1.setBounds(10, 85, 100, 15);
+                newFrame.add(ctLabel1);
+
+                JLabel ctLabel2 = new JLabel("About the family:");
+                ctLabel2.setBounds(10, 115, 100, 15);
+                newFrame.add(ctLabel2);
+
+                textField = new JTextField();
+                textField.setBounds(120, 85, 128, 20);
+                newFrame.add(textField);
+
+                textField2 = new JTextField();
+                textField2.setBounds(120, 115, 128, 20);
+                newFrame.add(textField2);
+
+                JButton contButton = new JButton("Continue");
+                contButton.setBounds(80, 150, 100, 25);
+                newFrame.add(contButton);
+
+
             }
         });
 
