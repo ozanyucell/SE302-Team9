@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -55,8 +56,19 @@ public class Modification {
         newTree.setMembers(newMember);
     }
 
+    public static void writeTree(Tree tree) throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\ozany\\Desktop\\"+ tree.getFamilyName() +".ftg"));
+        oos.writeObject(tree);
+        oos.close();
+    }
+
+    public static void readTree(Tree tree) throws IOException, ClassNotFoundException { // NOT WORKING PROPERLY
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\ozany\\Desktop\\"+ tree.getFamilyName() +".ftg"));
+        tree = (Tree) ois.readObject();
+        ois.close();
+    }
+
     public static void editTree(){}
     public static void deleteTree(){}
     public static void mergeTrees(){}
-
 }

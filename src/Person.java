@@ -1,6 +1,10 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Person{
+public class Person implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String name;
     private String surname;
     private int age;

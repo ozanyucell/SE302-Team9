@@ -1,6 +1,10 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tree {
+public class Tree implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String familyName;
     private ArrayList<Person> members = new ArrayList<Person>();
     private String about;

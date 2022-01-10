@@ -1,9 +1,12 @@
 import javax.swing.*;
+import java.io.IOException;
+import java.lang.management.MonitorInfo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
         // test addTree
         Tree newTree = Modification.addTree();
 
@@ -20,7 +23,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(width, height);
-        frame.setResizable(false);
+        frame.setResizable(false); // WITH THIS, PAGE IS NOT RESIZABLE ANYMORE
         frame.setLayout(null);
 
         JPanel panel = new JPanel();

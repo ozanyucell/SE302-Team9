@@ -1,6 +1,10 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Relation {
+public class Relation implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Person mother, father, partner;
     private ArrayList<Person> children;
 
