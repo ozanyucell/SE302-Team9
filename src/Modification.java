@@ -3,8 +3,33 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Modification {
-    // SETUP OR SOFTWARE NEEDS TO CREATE THIS DIRECTORY IN DOCUMENTS FOLDER !!!
-    static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\tree_container";
+    static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator";
+
+    public static void startup() throws IOException {
+        File directory = new File(rootDirectoryPath);
+        if (!directory.isDirectory()) {
+
+            directory.mkdir();
+        }
+
+        File pathConfig = new File(rootDirectoryPath+"\\path.config");
+        if (!pathConfig.exists()) {
+            pathConfig.createNewFile();
+        }
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(rootDirectoryPath+"\\path.config")));
+        String line = reader.readLine();
+        if(line != null){
+            rootDirectoryPath = line;
+        }
+    }
+
+    public static void pathWriter() throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator\\path.config", true)));
+        bufferedWriter.append(rootDirectoryPath);
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+    }
 
     public static Tree createTree() throws IOException {
         String familyName, about;
@@ -75,35 +100,4 @@ public class Modification {
 
     public static void mergeTrees(){}
 
-    /*
-    public static void setFileNames(HashSet<String> fileNames) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("..\\SE302-Team9\\tree_container\\file_names.txt")));
-        String line = reader.readLine();
-
-        while(line!=null) {
-            fileNames.add(line);
-            line = reader.readLine();
-        }
-    }
-
-    public static void writeTree(Tree tree) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("..\\SE302-Team9\\tree_container\\file_names.txt", true)));
-        writer.append(tree.getFamilyName());
-        writer.newLine();
-        writer.flush();
-
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("..\\SE302-Team9\\tree_container\\"+ tree.getFamilyName() +".tree"));
-        oos.writeObject(tree);
-        oos.close();
-    }
-
-    public static void readTree(Tree tree) throws IOException, ClassNotFoundException {
-        for (String fileName : fileNames){
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("..\\SE302-Team9\\tree_container\\" + fileName + ".tree"));
-            tree = (Tree) ois.readObject();
-            trees.add(tree);
-            ois.close();
-        }
-    }
-    */
 }

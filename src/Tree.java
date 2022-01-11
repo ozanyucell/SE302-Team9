@@ -1,10 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Tree implements Serializable {

@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Modification.startup();
         mainGUI();
     }
 
@@ -116,7 +117,12 @@ public class Main {
 
                 if (folderChooser.showOpenDialog(rootFolder) == JFileChooser.APPROVE_OPTION){
                     Modification.rootDirectoryPath = folderChooser.getSelectedFile().getAbsolutePath();
-                    System.out.println(Modification.rootDirectoryPath);
+                    try {
+                        Modification.pathWriter();
+                    }
+                    catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
