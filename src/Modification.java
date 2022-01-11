@@ -8,7 +8,6 @@ public class Modification {
     public static void startup() throws IOException {
         File directory = new File(rootDirectoryPath);
         if (!directory.isDirectory()) {
-
             directory.mkdir();
         }
 

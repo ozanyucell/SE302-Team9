@@ -36,7 +36,7 @@ public class Main {
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                openTreeConnector(frame, openButton, width, height);
+                openTreeConnector(frame, openButton, null, width, height);
             }
         });
 
@@ -107,6 +107,13 @@ public class Main {
         JMenuItem gitHubLink = new JMenuItem("GitHub");
         menuButton2.add(gitHubLink);
 
+        openBarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openTreeConnector(frame, null, openBarButton, width, 540);
+            }
+        });
+
         rootFolder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,23 +148,42 @@ public class Main {
 
     }
 
-    public static void openTreeConnector(JFrame frame, JButton button, int width, int height){
+    public static void openTreeConnector(JFrame frame, JButton button, JMenuItem menuItem, int width, int height){
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose a .tree file");
         fileChooser.setCurrentDirectory(new File(Modification.rootDirectoryPath));
 
-        if (fileChooser.showOpenDialog(button) == JFileChooser.APPROVE_OPTION){
-            if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
-                Tree tree = new Tree();
-                try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
-                catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
+        if(button == null){
+            if (fileChooser.showOpenDialog(menuItem) == JFileChooser.APPROVE_OPTION){
+                if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
+                    Tree tree = new Tree();
+                    try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
+                    catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
-                tree.displayTree(frame, width, height); // GUI template here
-                tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
+                    tree.displayTree(frame, width, height); // GUI template here
+                    tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
+                }
+
+                else {
+                    JOptionPane.showMessageDialog(frame, "Please select a .tree file.");
+                }
             }
+        }
 
-            else {
-                JOptionPane.showMessageDialog(frame, "Please select a .tree file.");
+        if(menuItem == null){
+            if (fileChooser.showOpenDialog(button) == JFileChooser.APPROVE_OPTION){
+                if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
+                    Tree tree = new Tree();
+                    try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
+                    catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
+
+                    tree.displayTree(frame, width, height); // GUI template here
+                    tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
+                }
+
+                else {
+                    JOptionPane.showMessageDialog(frame, "Please select a .tree file.");
+                }
             }
         }
     }
