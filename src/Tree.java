@@ -57,6 +57,8 @@ public class Tree implements Serializable {
         frame.setVisible(false);
         frame.dispose();
 
+        Main.menuBar(frame, width);
+
         JLabel familyName = new JLabel("Family Name: " + getFamilyName());
         familyName.setBounds(10, 40, width, 15);
         newFrame.add(familyName);

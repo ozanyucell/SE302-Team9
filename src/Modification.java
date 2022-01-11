@@ -1,7 +1,10 @@
+import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.util.Scanner;
 
 public class Modification {
+    // SETUP OR SOFTWARE NEEDS TO CREATE THIS DIRECTORY IN DOCUMENTS FOLDER !!!
+    static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\tree_container";
 
     public static Tree createTree() throws IOException {
         String familyName, about;
@@ -23,7 +26,7 @@ public class Modification {
             createMember(newTree);
             System.out.println();
         }
-        String createFilePath = "..\\SE302-Team9\\tree_container\\" + familyName + ".tree";
+        String createFilePath = rootDirectoryPath + familyName + ".tree";
         pushTree(newTree, createFilePath);
 
         return newTree;
