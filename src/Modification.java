@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Modification {
-    static String filePath = "Unknown";
 
     public static Tree createTree() throws IOException {
         String familyName, about;
@@ -59,7 +58,7 @@ public class Modification {
         oos.close();
     }
 
-    public static Tree pullTree() throws IOException, ClassNotFoundException {
+    public static Tree pullTree(String filePath) throws IOException, ClassNotFoundException {
         Tree importedTree;
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
         importedTree = (Tree) ois.readObject();

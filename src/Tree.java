@@ -1,5 +1,10 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Tree implements Serializable {
@@ -39,5 +44,29 @@ public class Tree implements Serializable {
         else { System.out.println(getMembers()); }
         System.out.println("\nAbout\n" + getAbout());
         System.out.println("-----------------------------");
+    }
+
+    public void displayTree(JFrame frame, int width, int height){
+        JFrame newFrame = new JFrame();
+        newFrame.pack();
+        newFrame.setSize(width, height);
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newFrame.setVisible(true);
+        newFrame.setLayout(null);
+        newFrame.setTitle("Tree Displayer");
+        frame.setVisible(false);
+        frame.dispose();
+
+        JLabel familyName = new JLabel("Family Name: " + getFamilyName());
+        familyName.setBounds(10, 40, width, 15);
+        newFrame.add(familyName);
+
+        JLabel about = new JLabel("About Family: " + getAbout());
+        about.setBounds(10, 80, width, 15);
+        newFrame.add(about);
+
+        JLabel members = new JLabel("Family Members: " + getMembers());
+        members.setBounds(10, 120, width, 15);
+        newFrame.add(members);
     }
 }

@@ -1,7 +1,9 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class Main {
         JFrame frame = new JFrame();
         frame.pack();
         frame.setSize(width,height);
+        frame.setTitle("Family Tree Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -27,6 +30,27 @@ public class Main {
 
         JMenu menuButton2 = new JMenu("Help");
         menuBar.add(menuButton2);
+
+        JMenuItem openBarButton = new JMenuItem("Open");
+        menuButton1.add(openBarButton);
+
+        JMenuItem createBarButton = new JMenuItem("Create");
+        menuButton1.add(createBarButton);
+
+        JMenuItem gitHubLink = new JMenuItem("GitHub");
+        menuButton2.add(gitHubLink);
+
+        gitHubLink.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/ozanyucell/SE302-Team9").toURI());
+                }
+                catch (Exception a) {
+                    a.printStackTrace();
+                }
+            }
+        });
 
         JButton openButton = new JButton("Open Tree");
         openButton.setBounds(170,150,200,200);
@@ -45,10 +69,9 @@ public class Main {
                 if (fileChooser.showOpenDialog(openButton) == JFileChooser.APPROVE_OPTION){
                     if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
                         Tree tree = new Tree();
-                        Modification.filePath = fileChooser.getSelectedFile().getAbsolutePath();
-                        try { tree = Modification.pullTree(); }
+                        try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
                         catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
-
+                        tree.displayTree(frame, width, height);
                         tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
                     }
 
@@ -64,7 +87,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 JFrame newFrame = new JFrame();
                 newFrame.pack();
-                newFrame.setSize(width,height);
+                newFrame.setSize(width, height);
                 newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 newFrame.setVisible(true);
                 newFrame.setLayout(null);
@@ -73,6 +96,7 @@ public class Main {
                 frame.dispose();
                 JTextField textField;
                 JTextField textField2;
+
                 JLabel ctLabel = new JLabel("CREATE TREE");
                 ctLabel.setBounds(80, 40, 100, 15);
                 newFrame.add(ctLabel);
@@ -96,8 +120,6 @@ public class Main {
                 JButton contButton = new JButton("Continue");
                 contButton.setBounds(80, 150, 100, 25);
                 newFrame.add(contButton);
-
-
             }
         });
 
