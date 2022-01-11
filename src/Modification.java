@@ -24,7 +24,7 @@ public class Modification {
     }
 
     public static void pathWriter() throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator\\path.config", true)));
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator\\path.config", false)));
         bufferedWriter.append(rootDirectoryPath);
         bufferedWriter.newLine();
         bufferedWriter.flush();
