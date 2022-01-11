@@ -50,11 +50,12 @@ public class Tree implements Serializable {
         newFrame.setVisible(true);
         newFrame.setLayout(null);
         newFrame.setTitle("Tree Displayer");
+
         frame.setVisible(false);
         frame.dispose();
 
-        Main.menuBar(frame, width);
-
+        Main.menuBar(newFrame, width);
+        
         JLabel familyName = new JLabel("Family Name: " + getFamilyName());
         familyName.setBounds(10, 40, width, 15);
         newFrame.add(familyName);

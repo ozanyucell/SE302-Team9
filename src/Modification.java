@@ -86,9 +86,8 @@ public class Modification {
     }
 
     public static Tree pullTree(String filePath) throws IOException, ClassNotFoundException {
-        Tree importedTree;
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
-        importedTree = (Tree) ois.readObject();
+        Tree importedTree = (Tree) ois.readObject();
         ois.close();
         return importedTree;
     }

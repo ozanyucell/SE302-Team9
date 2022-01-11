@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Main {
+    public static Tree tree;
+
     public static void main(String[] args) throws IOException {
         Modification.startup();
         mainGUI();
@@ -156,7 +158,6 @@ public class Main {
         if(button == null){
             if (fileChooser.showOpenDialog(menuItem) == JFileChooser.APPROVE_OPTION){
                 if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
-                    Tree tree = new Tree();
                     try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
                     catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
@@ -173,7 +174,6 @@ public class Main {
         if(menuItem == null){
             if (fileChooser.showOpenDialog(button) == JFileChooser.APPROVE_OPTION){
                 if(fileChooser.getSelectedFile().getAbsolutePath().endsWith(".tree")) {
-                    Tree tree = new Tree();
                     try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
                     catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
