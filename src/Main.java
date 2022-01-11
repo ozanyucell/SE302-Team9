@@ -75,9 +75,28 @@ public class Main {
                 textField2.setBounds(120, 115, 128, 20);
                 newFrame.add(textField2);
 
+                String famName = textField.getText();
+                String about = textField2.getText();
+
                 JButton contButton = new JButton("Continue");
-                contButton.setBounds(80, 150, 100, 25);
+                contButton.setBounds(180, 150, 100, 25);
+                JButton backButton = new JButton("Back");
+                backButton.setBounds(80, 150, 100, 25);
                 newFrame.add(contButton);
+                newFrame.add(backButton);
+
+                contButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        afterCont(newFrame,famName,about);
+                    }
+                });
+                backButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        pressedBack(frame,newFrame);
+                    }
+                });
             }
         });
 
@@ -186,5 +205,37 @@ public class Main {
                 }
             }
         }
+    }
+    public static void afterCont(JFrame frame, String fam, String about)
+    {
+        int width = 875, height = 540;
+        JFrame createFrame = new JFrame();
+        createFrame.pack();
+        createFrame.setSize(width, height);
+        createFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createFrame.setVisible(true);
+        createFrame.setLayout(null);
+        createFrame.setTitle("Create Tree");
+        frame.setVisible(false);
+        Tree tree = new Tree();
+        tree.setFamilyName(fam);
+        tree.setAbout(about);
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(80, 150, 100, 25);
+        createFrame.add(backButton);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pressedBack(frame,createFrame);
+            }
+        });
+
+    }
+    public static void pressedBack(JFrame frame1, JFrame frame2)
+    {
+        frame2.setVisible(false);
+        frame1.setVisible(true);
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(80, 150, 100, 25);
     }
 }
