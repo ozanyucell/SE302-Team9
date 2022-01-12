@@ -1,11 +1,11 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashSet;
 
 import static java.lang.Integer.parseInt;
 
@@ -15,6 +15,8 @@ public class Modification {
     public static String familyName;
     public static int publicMemberID = 1;
     public static Person currentPersonOnVisualiser;
+    public static DefaultMutableTreeNode selectedNode;
+    public static HashSet<Person> displayedNodes = new HashSet<Person>();
 
     public static void startup() throws IOException {
         File directory = new File(rootDirectoryPath);
@@ -132,7 +134,6 @@ public class Modification {
                 try {
                     headAge = parseInt(ageField.getText());
                     Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
-                    publicMemberID++;
                     newCreatedTree = new Tree(familyName, about, headNode);
 
                     JFrame frame = new JFrame();
@@ -146,7 +147,9 @@ public class Modification {
                     JPanel treePanel = new JPanel();
 
                     treePanel.setLayout(new FlowLayout());
-                    treePanel.add(newCreatedTree.jTreeVisualiser(newCreatedTree));
+
+                    JTree tree = newCreatedTree.jTreeVisualiser();
+                    treePanel.add(tree);
 
                     frame.add(treePanel);
 
@@ -213,6 +216,8 @@ public class Modification {
                             String gender = genderField.getText();
                             Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                             currentPersonOnVisualiser.setMother(newMember);
+                            newCreatedTree.jTreeCreator(selectedNode, null);
+                            tree.updateUI();
                         }
                     });
 
@@ -227,6 +232,8 @@ public class Modification {
                             String gender = genderField.getText();
                             Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                             currentPersonOnVisualiser.setFather(newMember);
+                            newCreatedTree.jTreeCreator(selectedNode, null);
+                            tree.updateUI();
                         }
                     });
 
@@ -242,10 +249,8 @@ public class Modification {
                             Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                             try {
                                 currentPersonOnVisualiser.setChildren(newMember);
-                                newCreatedTree.jTreeVisualiser(newCreatedTree).updateUI();
-                                System.out.println(currentPersonOnVisualiser.getRelation().getChildren().get(0));
-                                frame.pack();
-                                frame.setSize(1366, 720);
+                                newCreatedTree.jTreeCreator(selectedNode, null);
+                                tree.updateUI();
                             }
                             catch(Exception notSelected) {
                                 JOptionPane.showMessageDialog(null, "Please select a member to add.");
@@ -264,6 +269,8 @@ public class Modification {
                             String gender = nameField.getText();
                             Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                             currentPersonOnVisualiser.setPartner(newMember);
+                            newCreatedTree.jTreeCreator(selectedNode, null);
+                            tree.updateUI();
                         }
                     });
 

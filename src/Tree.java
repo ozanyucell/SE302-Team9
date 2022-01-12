@@ -99,29 +99,28 @@ public class Tree implements Serializable {
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
 
-        jTreeCreator(rootNode);
+        jTreeCreator(rootNode, null);
 
         newFrame.add(jtree);
 
         newFrame.setVisible(true);
     }
 
-    public JTree jTreeVisualiser(Tree tree){
+    public JTree jTreeVisualiser(){
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getId());
-
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
 
-        jTreeCreator(rootNode);
+        jTreeCreator(rootNode, null);
 
         jtree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
-                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jtree.getLastSelectedPathComponent();
-                String currentPersonID = selectedNode.getUserObject().toString();
-                for(int x = 0; x < tree.getMembers().size(); x++){
-                    if(tree.getMembers().get(x).getId().equals(currentPersonID)){
-                        Modification.currentPersonOnVisualiser = tree.getMembers().get(x);
+                Modification.selectedNode = (DefaultMutableTreeNode) jtree.getLastSelectedPathComponent();
+                String currentPersonID = Modification.selectedNode.getUserObject().toString();
+                for(int x = 0; x < Modification.newCreatedTree.getMembers().size(); x++){
+                    if(Modification.newCreatedTree.getMembers().get(x).getId().equals(currentPersonID)){
+                        Modification.currentPersonOnVisualiser = Modification.newCreatedTree.getMembers().get(x);
                     }
                 }
             }
@@ -130,17 +129,19 @@ public class Tree implements Serializable {
         return jtree;
     }
 
-    public void jTreeCreator(DefaultMutableTreeNode root){
-        DefaultMutableTreeNode childNode;
+    public void jTreeCreator(DefaultMutableTreeNode root, DefaultMutableTreeNode childNode){
+
         if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
             return; // last child needs to abort
         }
 
         for(Person child : getHeadNode().getRelation().getChildren()) {
-            childNode = new DefaultMutableTreeNode(child.getId());
-            root.add(childNode);
-            System.out.println(childNode);
-            // jTreeCreator(childNode);
+            if (!Modification.displayedNodes.contains(child)){
+                childNode = new DefaultMutableTreeNode(child.getId());
+                root.add(childNode);
+                Modification.displayedNodes.add(child);
+            }
+            // jTreeCreator(childNode, null);
         }
     }
 }

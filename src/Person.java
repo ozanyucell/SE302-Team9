@@ -32,6 +32,7 @@ public class Person implements Serializable {
         setAbout(about);
         setId(name + " " + surname + " - " + Modification.publicMemberID);
         this.relation = new Relation();
+        Modification.publicMemberID++;
     }
 
     public void setId(String id) { this.id = id; }
