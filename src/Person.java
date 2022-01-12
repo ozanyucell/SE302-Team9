@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Person implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+    private String id;
     private String name;
     private String surname;
     private int age;
@@ -29,8 +30,10 @@ public class Person implements Serializable {
         setGender(gender);
         setBornDate(bornDate);
         setAbout(about);
-
+        setId(name + " " + surname + " - " + Modification.publicMemberID);
     }
+
+    public void setId(String id) { this.id = id; }
 
     public void setName(String name) { this.name = name; }
 
@@ -47,6 +50,8 @@ public class Person implements Serializable {
     public void setRelation(Person mother, Person father, Person partner, ArrayList<Person> children) {
         this.relation = new Relation(mother, father, partner, children);
     }
+
+    public String getId() { return id; }
 
     public String getName() { return name; }
 

@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.io.Serial;
@@ -9,9 +11,8 @@ public class Tree implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private String familyName;
-    private Person headNode = new
-            Person();
-    //private ArrayList<Person> members = new ArrayList<Person>();
+    private Person headNode = new Person();
+    private ArrayList<Person> members = new ArrayList<Person>();
     private String about;
 
     Tree() {
@@ -23,13 +24,14 @@ public class Tree implements Serializable {
         setFamilyName(familyName);
         setAbout(about);
         setHeadNode(headNode);
+        setMembers(headNode);
     }
 
     public void setFamilyName(String familyName) { this.familyName = familyName; }
 
     public void setHeadNode(Person headNode) { this.headNode = headNode; }
 
-    //public void setMembers(Person member) { this.members.add(member); }
+    public void setMembers(Person member) { this.members.add(member); }
 
     public void setAbout(String about) { this.about = about; }
 
@@ -37,7 +39,7 @@ public class Tree implements Serializable {
 
     public Person getHeadNode() { return headNode; }
 
-    //public ArrayList<Person> getMembers() { return this.members; }
+    public ArrayList<Person> getMembers() { return this.members; }
 
     public String getAbout() { return about; }
 
@@ -80,7 +82,7 @@ public class Tree implements Serializable {
         */
     }
 
-    public void displayJTree(JFrame frame, int width, int height){
+    public void jTreeDisplayer(JFrame frame, int width, int height){
         JFrame newFrame = new JFrame();
         newFrame.pack();
         newFrame.setSize(width, height);
@@ -103,17 +105,29 @@ public class Tree implements Serializable {
         newFrame.setVisible(true);
     }
 
-    public JPanel jTreeVisualiser(){
+    public JPanel jTreeVisualiser(Tree tree){
         JPanel jpanel = new JPanel();
 
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode());
-
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getId());
         jTreeCreator(rootNode);
 
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
 
         jpanel.add(jtree);
+
+        jtree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jtree.getLastSelectedPathComponent();
+                String currentPersonID = selectedNode.getUserObject().toString();
+                for(int x = 0; x < tree.getMembers().size(); x++){
+                    if(tree.getMembers().get(x).getId().equals(currentPersonID)){
+                        Modification.currentPersonOnVisualiser = tree.getMembers().get(x);
+                    }
+                }
+            }
+        });
 
         return jpanel;
     }
@@ -125,7 +139,7 @@ public class Tree implements Serializable {
         }
 
         for(Person child : getHeadNode().getRelation().getChildren()) {
-            childNode = new DefaultMutableTreeNode(child);
+            childNode = new DefaultMutableTreeNode(child.getName());
             root.add(childNode);
             jTreeCreator(childNode);
         }

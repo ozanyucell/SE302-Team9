@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -12,6 +13,8 @@ public class Modification {
     static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator";
     public static Tree newCreatedTree;
     public static String familyName;
+    public static int publicMemberID = 1;
+    public static Person currentPersonOnVisualiser;
 
     public static void startup() throws IOException {
         File directory = new File(rootDirectoryPath);
@@ -120,16 +123,16 @@ public class Modification {
                 String about = textField2.getText();
                 String headName, headSurname, headGender, headBornDate, headAbout;
                 int headAge;
-                headName=nameField.getText();
-                headSurname=surnameField.getText();
-                headGender=genderField.getText();
-                headBornDate=bornDField.getText();
-                headAbout=aboutField.getText();
+                headName = nameField.getText();
+                headSurname = surnameField.getText();
+                headGender = genderField.getText();
+                headBornDate = bornDField.getText();
+                headAbout = aboutField.getText();
 
-                try {
+                //try {
                     headAge = parseInt(ageField.getText());
-
                     Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
+                    publicMemberID++;
                     newCreatedTree = new Tree(familyName, about, headNode);
 
                     JFrame frame = new JFrame();
@@ -143,7 +146,7 @@ public class Modification {
                     JPanel treePanel = new JPanel();
 
                     treePanel.setLayout(new FlowLayout());
-                    treePanel = newCreatedTree.jTreeVisualiser();
+                    treePanel = newCreatedTree.jTreeVisualiser(newCreatedTree);
 
                     frame.add(treePanel);
 
@@ -199,22 +202,25 @@ public class Modification {
 
                     inputPanel.setLayout(new GridLayout(8, 2));
 
+                    // WE NEED TO MAKE EDITOR FUNCTIONAL HERE
+                    
                     sl.setDividerLocation(frame.getHeight() / 5 * 3);
                     frame.add(sl);
                     frame.setVisible(true);
-                }
+                //}
 
+                /*
                 catch(Exception c){
                     JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
                 }
-
+                */
             }
         });
 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.pressedBack(frame,newFrame);
+                Main.pressedBack(frame, newFrame);
             }
         });
 
