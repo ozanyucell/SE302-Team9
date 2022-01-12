@@ -180,7 +180,8 @@ public class Main {
                     try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
                     catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
-                    tree.displayTree(frame, width, height); // GUI template here
+                    //tree.displayTree(frame, width, height); // GUI template here
+                    tree.displayJTree(frame, width, height);
                     tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
                 }
 
@@ -196,7 +197,8 @@ public class Main {
                     try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
                     catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
-                    tree.displayTree(frame, width, height); // GUI template here
+                    //tree.displayTree(frame, width, height); // GUI template here
+                    tree.displayJTree(frame, width, height);
                     tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
                 }
 
@@ -206,6 +208,7 @@ public class Main {
             }
         }
     }
+
     public static void afterCont(JFrame frame, String fam, String about)
     {
         int width = 875, height = 540;

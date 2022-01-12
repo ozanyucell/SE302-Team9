@@ -39,19 +39,14 @@ public class Modification {
         System.out.print("About Family: ");
         about = treeScan.next();
 
-        System.out.println();
-        System.out.print("How many members?: ");  //this part is
-        int memberCount = treeScan.nextInt();     //for testing,
-        System.out.println();                     //can be replaced with GUI
+        String headName=null, headSurname=familyName, headGender=null, headBornDate=null, headAbout=null;
+        int headAge = 0;
 
-        Tree newTree = new Tree(familyName, about);
+        Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
 
-        for(int x=0; x < memberCount; x++){
-            createMember(newTree);
-            System.out.println();
-        }
-        String createFilePath = rootDirectoryPath + familyName + ".tree";
-        pushTree(newTree, createFilePath);
+        Tree newTree = new Tree(familyName, about, headNode);
+
+        //pushTree(newTree, rootDirectoryPath + familyName + ".tree");
 
         return newTree;
     }
@@ -76,7 +71,6 @@ public class Modification {
 
         Person newMember = new Person(name, surname, age, gender, bornDate, about);
 
-        newTree.setMembers(newMember);
     }
 
     public static void pushTree(Tree tree, String createPath) throws IOException {
