@@ -46,8 +46,9 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Modification.createTree(frame,width,height);
-                } catch (IOException ex) {
+                    Modification.createTree(frame, width, height);
+                }
+                catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }

@@ -118,8 +118,8 @@ public class Modification {
             public void actionPerformed(ActionEvent e) {
                 familyName = textField.getText();
                 String about = textField2.getText();
-                String headName=null, headSurname=familyName, headGender=null, headBornDate=null, headAbout=null;
-                int headAge = 0;
+                String headName, headSurname, headGender, headBornDate, headAbout;
+                int headAge;
                 headName=nameField.getText();
                 headSurname=surnameField.getText();
                 headGender=genderField.getText();
@@ -128,15 +128,35 @@ public class Modification {
 
                 try {
                     headAge = parseInt(ageField.getText());
-                }
-                catch(Exception c){
-                    JOptionPane.showMessageDialog(null, "Please enter a valid number.");
+
+                    Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
+                    newCreatedTree = new Tree(familyName, about, headNode);
+
+                    JFrame frame = new JFrame();
+                    frame.pack();
+                    frame.setSize(1366, 720);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setTitle("Tree Generator");
+                    newFrame.setVisible(false);
+
+                    JPanel inputPanel = new JPanel();
+                    JPanel treePanel = new JPanel();
+
+                    JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, treePanel);
+
+                    sl.setDividerLocation(frame.getHeight() / 5 * 3);
+                    //sl.setResizeWeight(0.66);
+                    frame.add(sl);
+
+                    frame.setVisible(true);
                 }
 
-                // Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
-                // newCreatedTree = new Tree(familyName, about, headNode);
+                catch(Exception c){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
+                }
             }
         });
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
