@@ -6,13 +6,12 @@ public class Relation implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private Person mother, father, partner;
-    private ArrayList<Person> children;
+    private ArrayList<Person> children = new ArrayList<Person>();
 
-    Relation(Person mother, Person father, Person partner, ArrayList<Person> children){
-        setMother(mother);
-        setFather(father);
-        setPartner(partner);
-        setChildren(children);
+    Relation(){
+        setMother(null);
+        setFather(null);
+        setPartner(null);
     }
 
     public void setMother(Person mother) { this.mother = mother; }
@@ -21,7 +20,7 @@ public class Relation implements Serializable {
 
     public void setPartner(Person partner) { this.partner = partner; }
 
-    public void setChildren(ArrayList<Person> children) { this.children = children; }
+    public void setChildren(Person children) { this.children.add(children); }
 
     public Person getMother() { return mother; }
 

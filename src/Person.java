@@ -31,6 +31,7 @@ public class Person implements Serializable {
         setBornDate(bornDate);
         setAbout(about);
         setId(name + " " + surname + " - " + Modification.publicMemberID);
+        this.relation = new Relation();
     }
 
     public void setId(String id) { this.id = id; }
@@ -47,8 +48,18 @@ public class Person implements Serializable {
 
     public void setAbout(String about) { this.about = about; }
 
-    public void setRelation(Person mother, Person father, Person partner, ArrayList<Person> children) {
-        this.relation = new Relation(mother, father, partner, children);
+    public void setMother(Person mother) {
+        relation.setMother(mother);
+    }
+
+    public void setFather(Person father) {
+        relation.setFather(father);
+    }
+    public void setPartner(Person partner) {
+        relation.setPartner(partner);
+    }
+    public void setChildren(Person children) {
+        relation.setChildren(children);
     }
 
     public String getId() { return id; }

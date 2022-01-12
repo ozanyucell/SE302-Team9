@@ -96,25 +96,23 @@ public class Tree implements Serializable {
 
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode());
 
-        jTreeCreator(rootNode);
-
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
+
+        jTreeCreator(rootNode);
+
         newFrame.add(jtree);
 
         newFrame.setVisible(true);
     }
 
-    public JPanel jTreeVisualiser(Tree tree){
-        JPanel jpanel = new JPanel();
-
+    public JTree jTreeVisualiser(Tree tree){
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getId());
-        jTreeCreator(rootNode);
 
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
 
-        jpanel.add(jtree);
+        jTreeCreator(rootNode);
 
         jtree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
@@ -129,7 +127,7 @@ public class Tree implements Serializable {
             }
         });
 
-        return jpanel;
+        return jtree;
     }
 
     public void jTreeCreator(DefaultMutableTreeNode root){
@@ -139,9 +137,10 @@ public class Tree implements Serializable {
         }
 
         for(Person child : getHeadNode().getRelation().getChildren()) {
-            childNode = new DefaultMutableTreeNode(child.getName());
+            childNode = new DefaultMutableTreeNode(child.getId());
             root.add(childNode);
-            jTreeCreator(childNode);
+            System.out.println(childNode);
+            // jTreeCreator(childNode);
         }
     }
 }

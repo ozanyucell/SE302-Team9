@@ -129,7 +129,7 @@ public class Modification {
                 headBornDate = bornDField.getText();
                 headAbout = aboutField.getText();
 
-                //try {
+                try {
                     headAge = parseInt(ageField.getText());
                     Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
                     publicMemberID++;
@@ -146,7 +146,7 @@ public class Modification {
                     JPanel treePanel = new JPanel();
 
                     treePanel.setLayout(new FlowLayout());
-                    treePanel = newCreatedTree.jTreeVisualiser(newCreatedTree);
+                    treePanel.add(newCreatedTree.jTreeVisualiser(newCreatedTree));
 
                     frame.add(treePanel);
 
@@ -202,18 +202,79 @@ public class Modification {
 
                     inputPanel.setLayout(new GridLayout(8, 2));
 
-                    // WE NEED TO MAKE EDITOR FUNCTIONAL HERE
-                    
+                    motherButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String name = nameField.getText();
+                            String surname = surnameField.getText();
+                            String bornDate = bornDField.getText();
+                            int age = parseInt(ageField.getText());
+                            String aboutPerson = aboutField.getText();
+                            String gender = genderField.getText();
+                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                            currentPersonOnVisualiser.setMother(newMember);
+                        }
+                    });
+
+                    fatherButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String name = nameField.getText();
+                            String surname = surnameField.getText();
+                            String bornDate = bornDField.getText();
+                            int age = parseInt(ageField.getText());
+                            String aboutPerson = aboutField.getText();
+                            String gender = genderField.getText();
+                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                            currentPersonOnVisualiser.setFather(newMember);
+                        }
+                    });
+
+                    childButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String name = nameField.getText();
+                            String surname = surnameField.getText();
+                            String bornDate = bornDField.getText();
+                            int age = parseInt(ageField.getText());
+                            String aboutPerson = aboutField.getText();
+                            String gender = genderField.getText();
+                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                            try {
+                                currentPersonOnVisualiser.setChildren(newMember);
+                                newCreatedTree.jTreeVisualiser(newCreatedTree).updateUI();
+                                System.out.println(currentPersonOnVisualiser.getRelation().getChildren().get(0));
+                                frame.pack();
+                                frame.setSize(1366, 720);
+                            }
+                            catch(Exception notSelected) {
+                                JOptionPane.showMessageDialog(null, "Please select a member to add.");
+                            }
+                        }
+                    });
+
+                    partnerButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String name = nameField.getText();
+                            String surname = nameField.getText();
+                            String bornDate = nameField.getText();
+                            int age = parseInt(nameField.getText());
+                            String aboutPerson = nameField.getText();
+                            String gender = nameField.getText();
+                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                            currentPersonOnVisualiser.setPartner(newMember);
+                        }
+                    });
+
                     sl.setDividerLocation(frame.getHeight() / 5 * 3);
                     frame.add(sl);
                     frame.setVisible(true);
-                //}
+                }
 
-                /*
-                catch(Exception c){
+                catch (Exception nonIntInput){
                     JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
                 }
-                */
             }
         });
 
@@ -225,29 +286,6 @@ public class Modification {
         });
 
         pushTree(newCreatedTree, rootDirectoryPath + familyName + ".tree");
-    }
-
-    public static void createMember(Tree newTree){
-        String name, surname, gender, bornDate, about;
-        int age;
-        Scanner memberScan = new Scanner(System.in);
-
-        System.out.print("Name: ");
-        name = memberScan.next();
-        System.out.print("Surname: ");
-        surname = memberScan.next();
-        System.out.print("Age: ");
-        age = memberScan.nextInt();
-        System.out.print("Gender: ");
-        gender = memberScan.next();
-        System.out.print("Born Date: ");
-        bornDate = memberScan.next();
-        System.out.print("About: ");
-        about = memberScan.next();
-
-        // Relation newMemberRelation = new Relation();
-
-        Person newMember = new Person(name, surname, age, gender, bornDate, about);
     }
 
     public static void pushTree(Tree tree, String createPath) throws IOException {
