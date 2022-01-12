@@ -164,8 +164,9 @@ public class Modification {
         System.out.print("About: ");
         about = memberScan.next();
 
-        Person newMember = new Person(name, surname, age, gender, bornDate, about);
+        // Relation newMemberRelation = new Relation();
 
+        Person newMember = new Person(name, surname, age, gender, bornDate, about);
     }
 
     public static void pushTree(Tree tree, String createPath) throws IOException {
