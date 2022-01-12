@@ -144,6 +144,42 @@ public class Modification {
 
                     JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, treePanel);
 
+                    JLabel nameLabel = new JLabel("  Name:");
+                    JTextField nameField = new JTextField();
+                    JLabel surnameLabel = new JLabel("  Surname:");
+                    JTextField surnameField = new JTextField();
+                    JLabel bornDLabel = new JLabel("  Born Date:");
+                    JTextField bornDField = new JTextField();
+                    JLabel ageLabel = new JLabel("  Age:");
+                    JTextField ageField = new JTextField();
+                    JLabel aboutLabel = new JLabel("  About:");
+                    JTextField aboutField = new JTextField();
+                    JLabel genderLabel = new JLabel("  Gender:");
+                    JTextField genderField = new JTextField();
+
+                    JButton motherButton = new JButton("Add as a mother");
+                    JButton fatherButton = new JButton("Add as a father");
+                    JButton childButton = new JButton("Add as a child");
+                    JButton partnerButton = new JButton("Add as a partner");
+
+                    inputPanel.setLayout(new GridLayout(8, 2));
+                    inputPanel.add(nameLabel);
+                    inputPanel.add(nameField);
+                    inputPanel.add(surnameLabel);
+                    inputPanel.add(surnameField);
+                    inputPanel.add(bornDLabel);
+                    inputPanel.add(bornDField);
+                    inputPanel.add(ageLabel);
+                    inputPanel.add(ageField);
+                    inputPanel.add(aboutLabel);
+                    inputPanel.add(aboutField);
+                    inputPanel.add(genderLabel);
+                    inputPanel.add(genderField);
+                    inputPanel.add(motherButton);
+                    inputPanel.add(fatherButton);
+                    inputPanel.add(childButton);
+                    inputPanel.add(partnerButton);
+
                     sl.setDividerLocation(frame.getHeight() / 5 * 3);
                     //sl.setResizeWeight(0.66);
                     frame.add(sl);
