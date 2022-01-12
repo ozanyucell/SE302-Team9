@@ -6,9 +6,12 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class Modification {
     static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator";
     public static Tree newCreatedTree;
+    public static String familyName;
 
     public static void startup() throws IOException {
         File directory = new File(rootDirectoryPath);
@@ -36,7 +39,6 @@ public class Modification {
     }
 
     public static void createTree(JFrame frame, int width, int height) throws IOException {
-
         JFrame newFrame = new JFrame();
         newFrame.pack();
         newFrame.setSize(width, height);
@@ -49,12 +51,10 @@ public class Modification {
         JTextField textField;
         JTextField textField2;
 
-
         JPanel panel = new JPanel();
         panel.setBounds(10, 20, 300, 460);
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBorder(BorderFactory.createLineBorder(Color.black));
-        JPanel helperPanel = new JPanel();
 
         JLabel ctLabel = new JLabel("                                 CREATE TREE");
         ctLabel.setBounds(80, 40, 100, 15);
@@ -73,8 +73,6 @@ public class Modification {
         panel.add(textField2);
 
         JLabel mainLabel = new JLabel("                                Root Member");
-        panel.add(mainLabel);
-        JLabel empty = new JLabel(" ");
         panel.add(mainLabel);
 
         JLabel NameLabel = new JLabel("Name:");
@@ -118,32 +116,35 @@ public class Modification {
         contButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String familyName = textField.getText();
+                familyName = textField.getText();
                 String about = textField2.getText();
                 String headName=null, headSurname=familyName, headGender=null, headBornDate=null, headAbout=null;
-                String headAge = null;
+                int headAge = 0;
                 headName=nameField.getText();
                 headSurname=surnameField.getText();
                 headGender=genderField.getText();
                 headBornDate=bornDField.getText();
                 headAbout=aboutField.getText();
-                headAge=ageField.getText(); // age is string atm
-                System.out.println(headName + headAbout+ headSurname);
-                //Person headNode = new Person(headName, headSurname, 0, headGender, headBornDate, headAbout);
-                //newCreatedTree = new Tree(familyName, about, headNode);
+
+                try {
+                    headAge = parseInt(ageField.getText());
+                }
+                catch(Exception c){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid number.");
+                }
+
+                // Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
+                // newCreatedTree = new Tree(familyName, about, headNode);
             }
         });
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Main.pressedBack(frame,newFrame);
+                Main.pressedBack(frame,newFrame);
             }
         });
 
-
-
-        //pushTree(newTree, rootDirectoryPath + familyName + ".tree");
-
+        pushTree(newCreatedTree, rootDirectoryPath + familyName + ".tree");
     }
 
     public static void createMember(Tree newTree){
