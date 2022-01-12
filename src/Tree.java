@@ -103,11 +103,27 @@ public class Tree implements Serializable {
         newFrame.setVisible(true);
     }
 
+    public JPanel jTreeVisualiser(){
+        JPanel jpanel = new JPanel();
+
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode());
+
+        jTreeCreator(rootNode);
+
+        JTree jtree;
+        jtree = new javax.swing.JTree(rootNode);
+
+        jpanel.add(jtree);
+
+        return jpanel;
+    }
+
     public void jTreeCreator(DefaultMutableTreeNode root){
         DefaultMutableTreeNode childNode;
-        if (getHeadNode().getRelation().getChildren() == null){
-            // last child needs to abort
+        if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
+            return; // last child needs to abort
         }
+
         for(Person child : getHeadNode().getRelation().getChildren()) {
             childNode = new DefaultMutableTreeNode(child);
             root.add(childNode);

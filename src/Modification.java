@@ -142,54 +142,72 @@ public class Modification {
                     JPanel inputPanel = new JPanel();
                     JPanel treePanel = new JPanel();
 
+                    treePanel.setLayout(new FlowLayout());
+                    treePanel = newCreatedTree.jTreeVisualiser();
+
+                    frame.add(treePanel);
+
                     JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, treePanel);
 
                     JLabel nameLabel = new JLabel("  Name:");
+                    inputPanel.add(nameLabel);
+
                     JTextField nameField = new JTextField();
+                    inputPanel.add(nameField);
+
                     JLabel surnameLabel = new JLabel("  Surname:");
+                    inputPanel.add(surnameLabel);
+
                     JTextField surnameField = new JTextField();
+                    inputPanel.add(surnameField);
+
                     JLabel bornDLabel = new JLabel("  Born Date:");
+                    inputPanel.add(bornDLabel);
+
                     JTextField bornDField = new JTextField();
+                    inputPanel.add(bornDField);
+
                     JLabel ageLabel = new JLabel("  Age:");
+                    inputPanel.add(ageLabel);
+
                     JTextField ageField = new JTextField();
+                    inputPanel.add(ageField);
+
                     JLabel aboutLabel = new JLabel("  About:");
+                    inputPanel.add(aboutLabel);
+
                     JTextField aboutField = new JTextField();
+                    inputPanel.add(aboutField);
+
                     JLabel genderLabel = new JLabel("  Gender:");
+                    inputPanel.add(genderLabel);
+
                     JTextField genderField = new JTextField();
+                    inputPanel.add(genderField);
 
                     JButton motherButton = new JButton("Add as a mother");
-                    JButton fatherButton = new JButton("Add as a father");
-                    JButton childButton = new JButton("Add as a child");
-                    JButton partnerButton = new JButton("Add as a partner");
-
-                    inputPanel.setLayout(new GridLayout(8, 2));
-                    inputPanel.add(nameLabel);
-                    inputPanel.add(nameField);
-                    inputPanel.add(surnameLabel);
-                    inputPanel.add(surnameField);
-                    inputPanel.add(bornDLabel);
-                    inputPanel.add(bornDField);
-                    inputPanel.add(ageLabel);
-                    inputPanel.add(ageField);
-                    inputPanel.add(aboutLabel);
-                    inputPanel.add(aboutField);
-                    inputPanel.add(genderLabel);
-                    inputPanel.add(genderField);
                     inputPanel.add(motherButton);
+
+                    JButton fatherButton = new JButton("Add as a father");
                     inputPanel.add(fatherButton);
+
+                    JButton childButton = new JButton("Add as a child");
                     inputPanel.add(childButton);
+
+                    JButton partnerButton = new JButton("Add as a partner");
                     inputPanel.add(partnerButton);
 
-                    sl.setDividerLocation(frame.getHeight() / 5 * 3);
-                    //sl.setResizeWeight(0.66);
-                    frame.add(sl);
+                    inputPanel.setLayout(new GridLayout(8, 2));
 
+                    sl.setDividerLocation(frame.getHeight() / 5 * 3);
+                    frame.add(sl);
                     frame.setVisible(true);
                 }
 
                 catch(Exception c){
                     JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
                 }
+
             }
         });
 
