@@ -1,9 +1,14 @@
+import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Scanner;
 
 public class Modification {
     static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator";
+    public static Tree newCreatedTree;
 
     public static void startup() throws IOException {
         File directory = new File(rootDirectoryPath);
@@ -30,25 +35,115 @@ public class Modification {
         bufferedWriter.flush();
     }
 
-    public static Tree createTree() throws IOException {
-        String familyName, about;
-        Scanner treeScan = new Scanner(System.in);
+    public static void createTree(JFrame frame, int width, int height) throws IOException {
 
-        System.out.print("Family Name: ");
-        familyName = treeScan.next();
-        System.out.print("About Family: ");
-        about = treeScan.next();
+        JFrame newFrame = new JFrame();
+        newFrame.pack();
+        newFrame.setSize(width, height);
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newFrame.setVisible(true);
+        newFrame.setLayout(null);
+        newFrame.setTitle("Create Tree");
+        frame.setVisible(false);
+        frame.dispose();
+        JTextField textField;
+        JTextField textField2;
 
-        String headName=null, headSurname=familyName, headGender=null, headBornDate=null, headAbout=null;
-        int headAge = 0;
 
-        Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
+        JPanel panel = new JPanel();
+        panel.setBounds(10, 20, 300, 460);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        panel.setBorder(BorderFactory.createLineBorder(Color.black));
+        JPanel helperPanel = new JPanel();
 
-        Tree newTree = new Tree(familyName, about, headNode);
+        JLabel ctLabel = new JLabel("                                 CREATE TREE");
+        ctLabel.setBounds(80, 40, 100, 15);
+        panel.add(ctLabel);
+
+        JLabel ctLabel1 = new JLabel("Family Name:");
+        panel.add(ctLabel1);
+
+        textField = new JTextField();
+        panel.add(textField);
+
+        JLabel ctLabel2 = new JLabel("About the family:");
+        panel.add(ctLabel2);
+
+        textField2 = new JTextField();
+        panel.add(textField2);
+
+        JLabel mainLabel = new JLabel("                                Root Member");
+        panel.add(mainLabel);
+        JLabel empty = new JLabel(" ");
+        panel.add(mainLabel);
+
+        JLabel NameLabel = new JLabel("Name:");
+        panel.add(NameLabel);
+
+        JTextField nameField = new JTextField();
+        panel.add(nameField);
+
+        JLabel surnameLabel = new JLabel("Surname:");
+        panel.add(surnameLabel);
+        JTextField surnameField = new JTextField();
+        panel.add(surnameField);
+
+        JLabel bornDLabel = new JLabel("Born Date:");
+        panel.add(bornDLabel);
+        JTextField bornDField = new JTextField();
+        panel.add(bornDField);
+
+        JLabel ageLabel = new JLabel("Age:");
+        panel.add(ageLabel);
+        JTextField ageField = new JTextField();
+        panel.add(ageField);
+
+        JLabel aboutLabel = new JLabel("About:");
+        panel.add(aboutLabel);
+        JTextField aboutField = new JTextField();
+        panel.add(aboutField);
+
+        JLabel genderLabel = new JLabel("Gender:");
+        panel.add(genderLabel);
+        JTextField genderField = new JTextField();
+        panel.add(genderField);
+
+        newFrame.add(panel);
+
+        JButton contButton = new JButton("Continue");
+        JButton backButton = new JButton("Back");
+        panel.add(contButton);
+        panel.add(backButton);
+
+        contButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String familyName = textField.getText();
+                String about = textField2.getText();
+                String headName=null, headSurname=familyName, headGender=null, headBornDate=null, headAbout=null;
+                String headAge = null;
+                headName=nameField.getText();
+                headSurname=surnameField.getText();
+                headGender=genderField.getText();
+                headBornDate=bornDField.getText();
+                headAbout=aboutField.getText();
+                headAge=ageField.getText(); // age is string atm
+                System.out.println(headName + headAbout+ headSurname);
+                //Person headNode = new Person(headName, headSurname, 0, headGender, headBornDate, headAbout);
+                //newCreatedTree = new Tree(familyName, about, headNode);
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Main.pressedBack(frame,newFrame);
+            }
+        });
+
+
 
         //pushTree(newTree, rootDirectoryPath + familyName + ".tree");
 
-        return newTree;
     }
 
     public static void createMember(Tree newTree){

@@ -45,60 +45,11 @@ public class Main {
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame newFrame = new JFrame();
-                newFrame.pack();
-                newFrame.setSize(width, height);
-                newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                newFrame.setVisible(true);
-                newFrame.setLayout(null);
-                newFrame.setTitle("Create Tree");
-                frame.setVisible(false);
-                frame.dispose();
-                JTextField textField;
-                JTextField textField2;
-
-                JLabel ctLabel = new JLabel("CREATE TREE");
-                ctLabel.setBounds(80, 40, 100, 15);
-                newFrame.add(ctLabel);
-
-                JLabel ctLabel1 = new JLabel("Family Name:");
-                ctLabel1.setBounds(10, 85, 100, 15);
-                newFrame.add(ctLabel1);
-
-                JLabel ctLabel2 = new JLabel("About the family:");
-                ctLabel2.setBounds(10, 115, 100, 15);
-                newFrame.add(ctLabel2);
-
-                textField = new JTextField();
-                textField.setBounds(120, 85, 128, 20);
-                newFrame.add(textField);
-
-                textField2 = new JTextField();
-                textField2.setBounds(120, 115, 128, 20);
-                newFrame.add(textField2);
-
-                String famName = textField.getText();
-                String about = textField2.getText();
-
-                JButton contButton = new JButton("Continue");
-                contButton.setBounds(180, 150, 100, 25);
-                JButton backButton = new JButton("Back");
-                backButton.setBounds(80, 150, 100, 25);
-                newFrame.add(contButton);
-                newFrame.add(backButton);
-
-                contButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        afterCont(newFrame,famName,about);
-                    }
-                });
-                backButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        pressedBack(frame,newFrame);
-                    }
-                });
+                try {
+                    Modification.createTree(frame,width,height);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
