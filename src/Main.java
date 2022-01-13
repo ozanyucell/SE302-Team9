@@ -134,9 +134,7 @@ public class Main {
                     try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
                     catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
-                    //tree.displayTree(frame, width, height); // GUI template here
                     tree.jTreeDisplayer(frame, width, height);
-                    tree.printTree(); // NEEDS TO BE REPLACED WITH GUI
                 }
 
                 else {
@@ -151,7 +149,6 @@ public class Main {
                     try { tree = Modification.pullTree(fileChooser.getSelectedFile().getAbsolutePath()); }
                     catch (IOException | ClassNotFoundException ex) { ex.printStackTrace(); }
 
-                    //tree.displayTree(frame, width, height); // GUI template here
                     tree.jTreeDisplayer(frame, width, height);
 
                 }

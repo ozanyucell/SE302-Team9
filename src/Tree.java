@@ -43,16 +43,6 @@ public class Tree implements Serializable {
 
     public String getAbout() { return about; }
 
-    //for testing
-    public void printTree() {
-        System.out.println("-----------------------------");
-        System.out.println("Family Name: " + getFamilyName());
-        // if(members==null) { System.out.println("This tree is empty!"); }
-        // else { System.out.println(getMembers()); }
-        System.out.println("\nAbout\n" + getAbout());
-        System.out.println("-----------------------------");
-    }
-
     public void jTreeDisplayer(JFrame frame, int width, int height){
 
         JFrame newFrame = new JFrame();
@@ -101,7 +91,6 @@ public class Tree implements Serializable {
             }
         }
     }
-
 
     public JTree jTreeVisualiser(Person headNode, boolean inputIsPartner){
         DefaultMutableTreeNode rootNode;
