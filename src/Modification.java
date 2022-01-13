@@ -324,6 +324,16 @@ public class Modification {
                                         newCreatedTree.setMembers(newMember);
                                         newMember.setPartner(currentPersonOnVisualiser);
                                         newMember.getRelation().setChildrenArray(currentPersonOnVisualiser.getRelation().getChildren());
+
+                                        for(Person child : currentPersonOnVisualiser.getRelation().getChildren()) {
+                                            if(gender.equals("Female")) {
+                                                child.getRelation().setMother(newMember);
+                                            }
+                                            else if(gender.equals("Male")) {
+                                                child.getRelation().setFather(newMember);
+                                            }
+                                        }
+
                                         JTree spouseJTree = newCreatedTree.jTreeVisualiser(newMember,true);
                                         treePanel.add(spouseJTree);
                                         tree.updateUI();

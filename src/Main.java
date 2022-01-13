@@ -98,6 +98,18 @@ public class Main {
             }
         });
 
+        createBarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Modification.createTree(frame, width, 540);
+                }
+                catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
         rootFolder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
