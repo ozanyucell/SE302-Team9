@@ -53,8 +53,6 @@ public class Tree implements Serializable {
         System.out.println("-----------------------------");
     }
 
-
-
     public void jTreeDisplayer(JFrame frame, int width, int height){
 
         JFrame newFrame = new JFrame();
@@ -69,7 +67,7 @@ public class Tree implements Serializable {
         JPanel treePanel = new JPanel();
         JPanel infoPanel = new JPanel();
 
-        JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treePanel, infoPanel);
+        JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, infoPanel,treePanel);
 
         sl.setDividerLocation(newFrame.getHeight() / 5 * 2);
 
@@ -81,12 +79,29 @@ public class Tree implements Serializable {
 
         JTree jtree = new javax.swing.JTree(rootNode);
 
-        jTreeCreator(rootNode, null);
+        jTreeOpener(rootNode, null);
 
         treePanel.add(jtree);
 
         newFrame.setVisible(true);
     }
+
+    public void jTreeOpener(DefaultMutableTreeNode rootNode, DefaultMutableTreeNode childNode){
+        Modification.displayedNodes.clear();
+
+        if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
+            return; // last child needs to abort
+        }
+
+        for(Person child : getHeadNode().getRelation().getChildren()) {
+            if (!Modification.displayedNodes.contains(child)){
+                childNode = new DefaultMutableTreeNode(child.getId());
+                rootNode.add(childNode);
+                Modification.displayedNodes.add(child);
+            }
+        }
+    }
+
 
     public JTree jTreeVisualiser(Person headNode, boolean inputIsPartner){
         DefaultMutableTreeNode rootNode;
