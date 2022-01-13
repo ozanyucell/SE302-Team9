@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.io.Serial;
@@ -14,6 +16,7 @@ public class Tree implements Serializable {
     private ArrayList<Person> members = new ArrayList<Person>();
     private String about;
     private static HashSet<Person> displayedMembers = new HashSet<Person>();
+    private static JTree spouseTree;
 
     Tree() {
         setFamilyName("Unknown");
@@ -67,7 +70,7 @@ public class Tree implements Serializable {
 
         infoPanel.add(menuPanel);
         infoPanel.setLayout(new GridLayout(9,1));
-        JLabel nameLabel = new JLabel(" Name:");
+        JLabel nameLabel = new JLabel("  Name:");
         infoPanel.add(nameLabel);
 
         JLabel surnameLabel = new JLabel("  Surname:");
@@ -85,39 +88,65 @@ public class Tree implements Serializable {
         JLabel genderLabel = new JLabel("  Gender:");
         infoPanel.add(genderLabel);
 
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getName() + " " + getHeadNode().getSurname());
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getId());
 
         JTree jtree = new javax.swing.JTree(rootNode);
 
-        jTreeOpener(rootNode);
-
         treePanel.add(jtree);
+
+        jTreeOpener(rootNode, getHeadNode(), treePanel);
+
+        jtree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jtree.getLastSelectedPathComponent();
+                String currentPersonID = selectedNode.getUserObject().toString();
+                Person currentPersonOnVisualiser = null;
+                for (int x = 0; x < getMembers().size(); x++) {
+                    if (getMembers().get(x).getId().equals(currentPersonID)) {
+                        currentPersonOnVisualiser = getMembers().get(x);
+                        break;
+                    }
+                }
+                assert currentPersonOnVisualiser != null;
+                nameLabel.setText("  Name: " + currentPersonOnVisualiser.getName());
+                surnameLabel.setText("  Surname: " + currentPersonOnVisualiser.getSurname());
+                ageLabel.setText("  Age: " + currentPersonOnVisualiser.getAge());
+                bornDLabel.setText("  Born Date: " + currentPersonOnVisualiser.getBornDate());
+                aboutLabel.setText("  About: " + currentPersonOnVisualiser.getAbout());
+                genderLabel.setText("  Gender: " + currentPersonOnVisualiser.getGender());
+            }
+        });
 
         newFrame.setVisible(true);
     }
 
-    public void jTreeOpener(DefaultMutableTreeNode rootNode){
+    public void jTreeOpener(DefaultMutableTreeNode rootNode, Person rootPerson, JPanel treePanel){
         DefaultMutableTreeNode childNode;
 
         if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
             return; // last child needs to abort
         }
 
-        for(Person child : getHeadNode().getRelation().getChildren()) {
+        else if(rootPerson.getRelation().getPartner() != null){
+            DefaultMutableTreeNode spouseNode = new DefaultMutableTreeNode(getHeadNode().getRelation().getPartner().getId() + " (Spouse of " + getHeadNode().getName() + ")");
+            spouseTree = new javax.swing.JTree(spouseNode);
+            treePanel.add(spouseTree);
+        }
+
+        for(Person child : rootPerson.getRelation().getChildren()) {
             if (!displayedMembers.contains(child)){
                 childNode = new DefaultMutableTreeNode(child.getId());
                 rootNode.add(childNode);
                 displayedMembers.add(child);
-                jTreeOpener(childNode);
+                jTreeOpener(childNode, child, treePanel);
             }
         }
     }
 
     public JTree jTreeVisualiser(Person headNode, boolean inputIsPartner){
         DefaultMutableTreeNode rootNode;
-        if(!inputIsPartner) {
-            rootNode = new DefaultMutableTreeNode(headNode.getId());
-        }
+        if(!inputIsPartner) { rootNode = new DefaultMutableTreeNode(headNode.getId()); }
         else{
             rootNode = new DefaultMutableTreeNode(headNode.getId() + " (Spouse of " +
                     headNode.getRelation().getPartner().getName() + ")");
@@ -126,12 +155,14 @@ public class Tree implements Serializable {
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
 
-        jTreeCreator(rootNode, null);
+        jTreeCreator(rootNode);
 
         return jtree;
     }
 
-    public void jTreeCreator(DefaultMutableTreeNode root, DefaultMutableTreeNode childNode){
+    public void jTreeCreator(DefaultMutableTreeNode root){
+        DefaultMutableTreeNode childNode;
+
         if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
             return; // last child needs to abort
         }
@@ -141,6 +172,7 @@ public class Tree implements Serializable {
                 childNode = new DefaultMutableTreeNode(child.getId());
                 root.add(childNode);
                 Modification.displayedNodes.add(child);
+                jTreeCreator(childNode);
             }
         }
     }

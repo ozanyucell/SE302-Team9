@@ -310,9 +310,12 @@ public class Modification {
                                         else if (currentPersonOnVisualiser.getGender().equals("Male")) {
                                             newMember.setFather(currentPersonOnVisualiser);
                                         }
-                                        newCreatedTree.jTreeCreator(selectedNode, null);
+
+                                        newCreatedTree.jTreeCreator(selectedNode);
+
                                         tree.updateUI();
                                     }
+
                                     else {
                                         JOptionPane.showMessageDialog(null, "Please select a member to add.");
                                     }
@@ -327,7 +330,6 @@ public class Modification {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 try {
-
                                     if(currentPersonOnVisualiser != null) {
                                         int age = 0;
                                         String name = nameField.getText();
