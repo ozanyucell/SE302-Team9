@@ -46,10 +46,10 @@ public class Tree implements Serializable {
     //for testing
     public void printTree() {
         System.out.println("-----------------------------");
-        System.out.println("Aile Adı: " + getFamilyName());
+        System.out.println("Family Name: " + getFamilyName());
         // if(members==null) { System.out.println("This tree is empty!"); }
         // else { System.out.println(getMembers()); }
-        System.out.println("\nHakkında\n" + getAbout());
+        System.out.println("\nAbout\n" + getAbout());
         System.out.println("-----------------------------");
     }
 
@@ -74,12 +74,6 @@ public class Tree implements Serializable {
         JLabel about = new JLabel("Aile Hakkında: " + getAbout());
         about.setBounds(10, 80, width, 15);
         newFrame.add(about);
-
-        /*
-        JLabel members = new JLabel("Family Members: " + getMembers());
-        members.setBounds(10, 120, width, 15);
-        newFrame.add(members);
-        */
     }
 
     public void jTreeDisplayer(JFrame frame, int width, int height){

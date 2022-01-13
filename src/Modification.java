@@ -108,7 +108,7 @@ public class Modification {
         JTextField aboutField = new JTextField();
         panel.add(aboutField);
 
-        JLabel genderLabel = new JLabel("Gender:");
+        JLabel genderLabel = new JLabel("Gender (Please enter 'Male' or 'Female'):");
         panel.add(genderLabel);
         JTextField genderField = new JTextField();
         panel.add(genderField);
@@ -119,227 +119,228 @@ public class Modification {
         JButton backButton = new JButton("Back");
         panel.add(contButton);
         panel.add(backButton);
-
         contButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                familyName = textField.getText();
-                String about = textField2.getText();
-                String headName, headSurname, headGender, headBornDate, headAbout;
-                int headAge;
-                headName = nameField.getText();
-                headSurname = surnameField.getText();
-                headGender = genderField.getText();
-                headBornDate = bornDField.getText();
-                headAbout = aboutField.getText();
+                if (genderField.getText().equals("Female") || genderField.getText().equals("Male")) {
+                    familyName = textField.getText();
+                    String about = textField2.getText();
+                    String headName, headSurname, headGender, headBornDate, headAbout;
+                    int headAge;
+                    headName = nameField.getText();
+                    headSurname = surnameField.getText();
+                    headGender = genderField.getText();
+                    headBornDate = bornDField.getText();
+                    headAbout = aboutField.getText();
 
-                try {
-                    headAge = parseInt(ageField.getText());
-                    Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
-                    newCreatedTree = new Tree(familyName, about, headNode);
+                    try {
+                        headAge = parseInt(ageField.getText());
+                        Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
+                        newCreatedTree = new Tree(familyName, about, headNode);
 
-                    JFrame frame = new JFrame();
-                    frame.pack();
-                    frame.setSize(1366, 720);
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setTitle(familyName);
-                    newFrame.setVisible(false);
+                        JFrame frame = new JFrame();
+                        frame.pack();
+                        frame.setSize(1366, 720);
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setTitle(familyName);
+                        newFrame.setVisible(false);
 
-                    JPanel inputPanel = new JPanel();
-                    JPanel treePanel = new JPanel();
+                        JPanel inputPanel = new JPanel();
+                        JPanel treePanel = new JPanel();
 
-                    treePanel.setLayout(new FlowLayout());
+                        treePanel.setLayout(new FlowLayout());
 
-                    JTree tree = newCreatedTree.jTreeVisualiser();
-                    tree.addTreeSelectionListener(new TreeSelectionListener() {
-                        @Override
-                        public void valueChanged(TreeSelectionEvent e) {
-                            selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-                            String currentPersonID = selectedNode.getUserObject().toString();
-                            for(int x = 0; x < newCreatedTree.getMembers().size(); x++){
-                                if(newCreatedTree.getMembers().get(x).getId().equals(currentPersonID)){
-                                    currentPersonOnVisualiser = newCreatedTree.getMembers().get(x);
-                                    break;
+                        JTree tree = newCreatedTree.jTreeVisualiser();
+                        tree.addTreeSelectionListener(new TreeSelectionListener() {
+                            @Override
+                            public void valueChanged(TreeSelectionEvent e) {
+                                selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                                String currentPersonID = selectedNode.getUserObject().toString();
+                                for (int x = 0; x < newCreatedTree.getMembers().size(); x++) {
+                                    if (newCreatedTree.getMembers().get(x).getId().equals(currentPersonID)) {
+                                        currentPersonOnVisualiser = newCreatedTree.getMembers().get(x);
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
 
-                    treePanel.add(tree);
+                        treePanel.add(tree);
 
-                    frame.add(treePanel);
+                        frame.add(treePanel);
 
-                    JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, treePanel);
+                        JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, treePanel);
 
-                    JLabel nameLabel = new JLabel("  Name:");
-                    inputPanel.add(nameLabel);
+                        JLabel nameLabel = new JLabel("  Name:");
+                        inputPanel.add(nameLabel);
 
-                    JTextField nameField = new JTextField();
-                    inputPanel.add(nameField);
+                        JTextField nameField = new JTextField();
+                        inputPanel.add(nameField);
 
-                    JLabel surnameLabel = new JLabel("  Surname:");
-                    inputPanel.add(surnameLabel);
+                        JLabel surnameLabel = new JLabel("  Surname:");
+                        inputPanel.add(surnameLabel);
 
-                    JTextField surnameField = new JTextField();
-                    inputPanel.add(surnameField);
+                        JTextField surnameField = new JTextField();
+                        inputPanel.add(surnameField);
 
-                    JLabel ageLabel = new JLabel("  Age:");
-                    inputPanel.add(ageLabel);
+                        JLabel ageLabel = new JLabel("  Age:");
+                        inputPanel.add(ageLabel);
 
-                    JTextField ageField = new JTextField();
-                    inputPanel.add(ageField);
+                        JTextField ageField = new JTextField();
+                        inputPanel.add(ageField);
 
-                    JLabel bornDLabel = new JLabel("  Born Date:");
-                    inputPanel.add(bornDLabel);
+                        JLabel bornDLabel = new JLabel("  Born Date:");
+                        inputPanel.add(bornDLabel);
 
-                    JTextField bornDField = new JTextField();
-                    inputPanel.add(bornDField);
+                        JTextField bornDField = new JTextField();
+                        inputPanel.add(bornDField);
 
-                    JLabel aboutLabel = new JLabel("  About:");
-                    inputPanel.add(aboutLabel);
+                        JLabel aboutLabel = new JLabel("  About:");
+                        inputPanel.add(aboutLabel);
 
-                    JTextField aboutField = new JTextField();
-                    inputPanel.add(aboutField);
+                        JTextField aboutField = new JTextField();
+                        inputPanel.add(aboutField);
 
-                    JLabel genderLabel = new JLabel("  Gender:");
-                    inputPanel.add(genderLabel);
+                        JLabel genderLabel = new JLabel("  Gender (Please enter 'Male' or 'Female'):");
+                        inputPanel.add(genderLabel);
 
-                    JTextField genderField = new JTextField();
-                    inputPanel.add(genderField);
+                        JTextField genderField = new JTextField();
+                        inputPanel.add(genderField);
 
-                    JButton childButton = new JButton("Add as a child");
-                    inputPanel.add(childButton);
+                        JButton childButton = new JButton("Add as a child");
+                        inputPanel.add(childButton);
 
-                    JButton partnerButton = new JButton("Add as a partner");
-                    inputPanel.add(partnerButton);
+                        JButton partnerButton = new JButton("Add as a partner");
+                        inputPanel.add(partnerButton);
 
-                    JButton editButton = new JButton("Edit selected member");
-                    inputPanel.add(editButton);
+                        JButton editButton = new JButton("Edit selected member");
+                        inputPanel.add(editButton);
 
-                    JButton confirmButton = new JButton("Confirm the tree");
-                    inputPanel.add(confirmButton);
+                        JButton confirmButton = new JButton("Confirm the tree");
+                        inputPanel.add(confirmButton);
 
-                    inputPanel.setLayout(new GridLayout(8, 2));
+                        inputPanel.setLayout(new GridLayout(8, 2));
 
-                    editButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            String name = nameField.getText();
-                            String surname = surnameField.getText();
-                            int age = 0;
-                            if(!ageField.getText().equals("")) {
-                                age = parseInt(ageField.getText());
-                            }
-                            String bornDate = bornDField.getText();
-                            String aboutPerson = aboutField.getText();
-                            String gender = genderField.getText();
-
-                            if(!name.equals("")){
-                                currentPersonOnVisualiser.setName(name);
-                            }
-                            if(!surname.equals("")){
-                                currentPersonOnVisualiser.setSurname(surname);
-                            }
-                            if(age != 0){
-                                currentPersonOnVisualiser.setAge(age);
-                            }
-                            if(!gender.equals("")){
-                                currentPersonOnVisualiser.setGender(gender);
-                            }
-                            if(!bornDate.equals("")){
-                                currentPersonOnVisualiser.setBornDate(bornDate);
-                            }
-                            if(!aboutPerson.equals("")){
-                                currentPersonOnVisualiser.setAbout(aboutPerson);
-                            }
-
-                            currentPersonOnVisualiser.setId(name + " " +  surname + " - " + currentPersonOnVisualiser.getId().split(" - ")[1]);
-
-                            selectedNode.setUserObject(currentPersonOnVisualiser.getId());
-
-                            // newCreatedTree.jTreeCreator(selectedNode, null);
-                            tree.updateUI();
-
-                            System.out.println(currentPersonOnVisualiser.getName());
-                            System.out.println(currentPersonOnVisualiser.getId());
-                        }
-                    });
-
-                    confirmButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            JFileChooser newFileChooser = new JFileChooser();
-                            newFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                            newFileChooser.setDialogTitle("Please select a directory to create.");
-                            newFileChooser.setCurrentDirectory(new File(Modification.rootDirectoryPath));
-
-                            if (newFileChooser.showOpenDialog(confirmButton) == JFileChooser.APPROVE_OPTION){
-                                try {
-                                    pushTree(newCreatedTree, newFileChooser.getSelectedFile().getAbsolutePath() + "\\"+ familyName + ".tree");
-                                    frame.dispose();
-                                    JOptionPane.showMessageDialog(null, "Tree has successfully been saved.");
-                                    Main.mainGUI();
+                        editButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String name = nameField.getText();
+                                String surname = surnameField.getText();
+                                int age = 0;
+                                if (!ageField.getText().equals("")) {
+                                    age = parseInt(ageField.getText());
                                 }
-                                catch (IOException ex) {
-                                    ex.printStackTrace();
+                                String bornDate = bornDField.getText();
+                                String aboutPerson = aboutField.getText();
+                                String gender = genderField.getText();
+
+                                if (!name.equals("")) {
+                                    currentPersonOnVisualiser.setName(name);
+                                }
+                                if (!surname.equals("")) {
+                                    currentPersonOnVisualiser.setSurname(surname);
+                                }
+                                if (age != 0) {
+                                    currentPersonOnVisualiser.setAge(age);
+                                }
+                                if (!gender.equals("")) {
+                                    currentPersonOnVisualiser.setGender(gender);
+                                }
+                                if (!bornDate.equals("")) {
+                                    currentPersonOnVisualiser.setBornDate(bornDate);
+                                }
+                                if (!aboutPerson.equals("")) {
+                                    currentPersonOnVisualiser.setAbout(aboutPerson);
+                                }
+
+                                currentPersonOnVisualiser.setId(name + " " + surname + " - " + currentPersonOnVisualiser.getId().split(" - ")[1]);
+
+                                selectedNode.setUserObject(currentPersonOnVisualiser.getId());
+
+                                // newCreatedTree.jTreeCreator(selectedNode, null);
+                                tree.updateUI();
+
+                                System.out.println(currentPersonOnVisualiser.getName());
+                                System.out.println(currentPersonOnVisualiser.getId());
+                            }
+                        });
+
+                        confirmButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                JFileChooser newFileChooser = new JFileChooser();
+                                newFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                                newFileChooser.setDialogTitle("Please select a directory to create.");
+                                newFileChooser.setCurrentDirectory(new File(Modification.rootDirectoryPath));
+
+                                if (newFileChooser.showOpenDialog(confirmButton) == JFileChooser.APPROVE_OPTION) {
+                                    try {
+                                        pushTree(newCreatedTree, newFileChooser.getSelectedFile().getAbsolutePath() + "\\" + familyName + ".tree");
+                                        frame.dispose();
+                                        JOptionPane.showMessageDialog(null, "Tree has successfully been saved.");
+                                        Main.mainGUI();
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
 
-                    childButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            String name = nameField.getText();
-                            String surname = surnameField.getText();
-                            String bornDate = bornDField.getText();
-                            int age = parseInt(ageField.getText());
-                            String aboutPerson = aboutField.getText();
-                            String gender = genderField.getText();
+                        childButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String name = nameField.getText();
+                                String surname = surnameField.getText();
+                                String bornDate = bornDField.getText();
+                                int age = parseInt(ageField.getText());
+                                String aboutPerson = aboutField.getText();
+                                String gender = genderField.getText();
 
-                            if(currentPersonOnVisualiser!=null) {
+                                if (currentPersonOnVisualiser != null) {
+                                    Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                                    currentPersonOnVisualiser.setChildren(newMember);
+                                    newCreatedTree.setMembers(newMember);
+                                    if (currentPersonOnVisualiser.getGender().equals("Female")) {
+                                        newMember.setMother(currentPersonOnVisualiser);
+                                    } else if (currentPersonOnVisualiser.getGender().equals("Male")) {
+                                        newMember.setFather(currentPersonOnVisualiser);
+                                    }
+                                    newCreatedTree.jTreeCreator(selectedNode, null);
+                                    tree.updateUI();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Please select a member to add.");
+                                }
+                            }
+                        });
+
+                        partnerButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String name = nameField.getText();
+                                String surname = nameField.getText();
+                                String bornDate = nameField.getText();
+                                int age = parseInt(nameField.getText());
+                                String aboutPerson = nameField.getText();
+                                String gender = nameField.getText();
                                 Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
-                                currentPersonOnVisualiser.setChildren(newMember);
+                                currentPersonOnVisualiser.setPartner(newMember);
                                 newCreatedTree.setMembers(newMember);
-                                if(currentPersonOnVisualiser.getGender().equals("Female")) {
-                                    newMember.setMother(currentPersonOnVisualiser);
-                                }
-                                else if (currentPersonOnVisualiser.getGender().equals("Male")) {
-                                    newMember.setFather(currentPersonOnVisualiser);
-                                }
                                 newCreatedTree.jTreeCreator(selectedNode, null);
                                 tree.updateUI();
                             }
-                            else {
-                                JOptionPane.showMessageDialog(null, "Please select a member to add.");
-                            }
-                        }
-                    });
+                        });
 
-                    partnerButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            String name = nameField.getText();
-                            String surname = nameField.getText();
-                            String bornDate = nameField.getText();
-                            int age = parseInt(nameField.getText());
-                            String aboutPerson = nameField.getText();
-                            String gender = nameField.getText();
-                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
-                            currentPersonOnVisualiser.setPartner(newMember);
-                            newCreatedTree.setMembers(newMember);
-                            newCreatedTree.jTreeCreator(selectedNode, null);
-                            tree.updateUI();
-                        }
-                    });
-
-                    sl.setDividerLocation(frame.getHeight() / 5 * 3);
-                    frame.add(sl);
-                    frame.setVisible(true);
+                        sl.setDividerLocation(frame.getHeight() / 5 * 3);
+                        frame.add(sl);
+                        frame.setVisible(true);
+                    }
+                    catch (Exception nonIntInput) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
+                    }
                 }
 
-                catch (Exception nonIntInput){
-                    JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
+                else{
+                    JOptionPane.showMessageDialog(null, "Please enter 'Female' or 'Male' at gender field.");
                 }
             }
         });
@@ -366,11 +367,4 @@ public class Modification {
         ois.close();
         return importedTree;
     }
-
-    public static void editTree(){}
-
-    public static void deleteTree(){}
-
-    public static void mergeTrees(){}
-
 }
