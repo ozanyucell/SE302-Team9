@@ -6,15 +6,13 @@
 * Nothing for now.
 
 # What you can work on:
-  * Relation algorithms are missing.
-  * editTree, mergeTrees and deleteTree functions.
-  * We need to implement GUIs for Tree creation and member adding.
-  * Also, we need a GUI for printing out the tree.
+  * An algorithm which is able to find relation between to nodes.
+  * mergeTrees and deleteTree functions.
   * We need to be careful with exceptions. (Like a user entering his name in the age box.)
 
 # What we did:
   * Implemented basic required backend classes.
-  * Implemented a GUI for main page.
+  * Implemented a GUI.
   * File I/O working properly.
-  * Software is now able to open ".tree" files. Tested on terminal. GUI is missing.
-  * Software is able to write ".tree" files as well. Tested on terminal. GUI is missing.
+  * Software is now able to open ".tree" files.
+  * Software is able to write ".tree" files as well.
