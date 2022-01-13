@@ -56,6 +56,7 @@ public class Tree implements Serializable {
 
         JPanel treePanel = new JPanel();
         JPanel infoPanel = new JPanel();
+        JPanel menupanel = new JPanel();
 
         JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, infoPanel,treePanel);
 
@@ -63,7 +64,27 @@ public class Tree implements Serializable {
 
         newFrame.add(sl);
 
-        Main.menuBar(newFrame,infoPanel, 1100);
+        Main.menuBar(newFrame,menupanel, 1100);
+
+        infoPanel.add(menupanel);
+        infoPanel.setLayout(new GridLayout(9,1));
+        JLabel nameLabel = new JLabel(" Name:");
+        infoPanel.add(nameLabel);
+
+        JLabel surnameLabel = new JLabel("  Surname:");
+        infoPanel.add(surnameLabel);
+
+        JLabel ageLabel = new JLabel("  Age:");
+        infoPanel.add(ageLabel);
+
+        JLabel bornDLabel = new JLabel("  Born Date:");
+        infoPanel.add(bornDLabel);
+
+        JLabel aboutLabel = new JLabel("  About:");
+        infoPanel.add(aboutLabel);
+
+        JLabel genderLabel = new JLabel("  Gender:");
+        infoPanel.add(genderLabel);
 
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getName() + " " + getHeadNode().getSurname());
 
