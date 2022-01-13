@@ -53,52 +53,37 @@ public class Tree implements Serializable {
         System.out.println("-----------------------------");
     }
 
-    public void displayTree(JFrame frame, int width, int height){
-        JFrame newFrame = new JFrame();
-        newFrame.pack();
-        newFrame.setSize(width, height);
-        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        newFrame.setVisible(true);
-        newFrame.setLayout(null);
-        newFrame.setTitle("");
 
-        frame.setVisible(false);
-        frame.dispose();
-
-        Main.menuBar(newFrame, width);
-
-        JLabel familyName = new JLabel("Aile Adı: " + getFamilyName());
-        familyName.setBounds(10, 40, width, 15);
-        newFrame.add(familyName);
-
-        JLabel about = new JLabel("Aile Hakkında: " + getAbout());
-        about.setBounds(10, 80, width, 15);
-        newFrame.add(about);
-    }
 
     public void jTreeDisplayer(JFrame frame, int width, int height){
 
         JFrame newFrame = new JFrame();
         newFrame.pack();
-        newFrame.setSize(width, height);
+        newFrame.setSize(1366, 720);
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        newFrame.setVisible(true);
-        newFrame.setLayout(new FlowLayout());
-        newFrame.setTitle("Tree Displayer");
-
-        Main.menuBar(newFrame, width);
+        newFrame.setTitle("Open Tree");
 
         frame.setVisible(false);
         frame.dispose();
 
+        JPanel treePanel = new JPanel();
+        JPanel infoPanel = new JPanel();
+
+        JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treePanel, infoPanel);
+
+        sl.setDividerLocation(newFrame.getHeight() / 5 * 2);
+
+        newFrame.add(sl);
+
+        Main.menuBar(newFrame,infoPanel, 1100);
+
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getName() + " " + getHeadNode().getSurname());
 
-        JTree jtree;
-        jtree = new javax.swing.JTree(rootNode);
+        JTree jtree = new javax.swing.JTree(rootNode);
 
         jTreeCreator(rootNode, null);
 
-        newFrame.add(jtree);
+        treePanel.add(jtree);
 
         newFrame.setVisible(true);
     }

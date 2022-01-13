@@ -24,8 +24,9 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
+        JPanel panel = new JPanel();
 
-        menuBar(frame, width);
+        menuBar(frame,panel, width);
 
         JButton openButton = new JButton("Open a Tree");
         openButton.setBounds(170,150,200,200);
@@ -57,10 +58,11 @@ public class Main {
         frame.setVisible(true);
     }
 
-    public static void menuBar(JFrame frame, int width){
+    public static void menuBar(JFrame frame,JPanel panel, int width){
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBounds(0, 0, width, 30);
-        frame.add(menuBar);
+        panel.setLayout(null);
+        panel.add(menuBar);
 
         JMenu menuButton1 = new JMenu("File");
         menuBar.add(menuButton1);
