@@ -141,7 +141,6 @@ public class Tree implements Serializable {
                 root.add(childNode);
                 Modification.displayedNodes.add(child);
             }
-            // jTreeCreator(childNode, null);
         }
     }
 }

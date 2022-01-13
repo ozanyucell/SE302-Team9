@@ -10,7 +10,7 @@ import java.util.HashSet;
 import static java.lang.Integer.parseInt;
 
 public class Modification {
-    static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Aile Ağacı Oluşturucu";
+    static String rootDirectoryPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Family Tree Generator";
     public static Tree newCreatedTree;
     public static String familyName;
     public static int publicMemberID = 1;
@@ -50,80 +50,73 @@ public class Modification {
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         newFrame.setVisible(true);
         newFrame.setLayout(null);
-        newFrame.setTitle("Ağaç Oluştur");
+        newFrame.setTitle("Create Tree");
         frame.setVisible(false);
         frame.dispose();
         JTextField textField;
         JTextField textField2;
 
         JPanel panel = new JPanel();
-        panel.setBounds(10, 20, 300, 410);
+        panel.setBounds(10, 20, 300, 460);
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        JPanel panel2 = new JPanel();
-        panel2.setBounds(10, 435, 300, 30);
-        panel2.setLayout(new GridLayout(1,2));
-        panel2.setVisible(true);
-
-        JLabel ctLabel = new JLabel("                                 Ağaç Oluşturma");
+        JLabel ctLabel = new JLabel("                                 Create Tree");
         ctLabel.setBounds(80, 40, 100, 15);
         panel.add(ctLabel);
 
-        JLabel ctLabel1 = new JLabel("Aile Adı:");
+        JLabel ctLabel1 = new JLabel("Family Name:");
         panel.add(ctLabel1);
 
         textField = new JTextField();
         panel.add(textField);
 
-        JLabel ctLabel2 = new JLabel("Aileniz Hakkında:");
+        JLabel ctLabel2 = new JLabel("About the family:");
         panel.add(ctLabel2);
 
         textField2 = new JTextField();
         panel.add(textField2);
 
-        JLabel mainLabel = new JLabel("                                Root Member"); // dont know about this one
+        JLabel mainLabel = new JLabel("                                Root Member");
         panel.add(mainLabel);
 
-        JLabel NameLabel = new JLabel("İsim:");
+        JLabel NameLabel = new JLabel("Name:");
         panel.add(NameLabel);
 
         JTextField nameField = new JTextField();
         panel.add(nameField);
 
-        JLabel surnameLabel = new JLabel("Soyisim:");
+        JLabel surnameLabel = new JLabel("Surname:");
         panel.add(surnameLabel);
         JTextField surnameField = new JTextField();
         panel.add(surnameField);
 
-        JLabel bornDLabel = new JLabel("Doğum Tarihi:");
+        JLabel bornDLabel = new JLabel("Born Date:");
         panel.add(bornDLabel);
         JTextField bornDField = new JTextField();
         panel.add(bornDField);
 
-        JLabel ageLabel = new JLabel("Yaş:");
+        JLabel ageLabel = new JLabel("Age:");
         panel.add(ageLabel);
         JTextField ageField = new JTextField();
         panel.add(ageField);
 
-        JLabel aboutLabel = new JLabel("Hakkında:");
+        JLabel aboutLabel = new JLabel("About:");
         panel.add(aboutLabel);
         JTextField aboutField = new JTextField();
         panel.add(aboutField);
 
-        JLabel genderLabel = new JLabel("Cinsiyet:");
+        JLabel genderLabel = new JLabel("Gender:");
         panel.add(genderLabel);
         JTextField genderField = new JTextField();
         panel.add(genderField);
 
         newFrame.add(panel);
-        newFrame.add(panel2);
 
-        JButton contButton = new JButton("Devam et");
-        JButton backButton = new JButton("Geri");
-
-        panel2.add(backButton);
-        panel2.add(contButton);
+        JButton contButton = new JButton("Continue");
+        JButton backButton = new JButton("Back");
+        panel.add(contButton);
+        panel.add(backButton);
 
         contButton.addActionListener(new ActionListener() {
             @Override
@@ -147,7 +140,7 @@ public class Modification {
                     frame.pack();
                     frame.setSize(1366, 720);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setTitle("Aile Ağacı Oluşturucu");
+                    frame.setTitle(familyName);
                     newFrame.setVisible(false);
 
                     JPanel inputPanel = new JPanel();
@@ -162,85 +155,110 @@ public class Modification {
 
                     JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, treePanel);
 
-                    JLabel nameLabel = new JLabel("  İsim:");
+                    JLabel nameLabel = new JLabel("  Name:");
                     inputPanel.add(nameLabel);
 
                     JTextField nameField = new JTextField();
                     inputPanel.add(nameField);
 
-                    JLabel surnameLabel = new JLabel("  Soyisim:");
+                    JLabel surnameLabel = new JLabel("  Surname:");
                     inputPanel.add(surnameLabel);
 
                     JTextField surnameField = new JTextField();
                     inputPanel.add(surnameField);
 
-                    JLabel bornDLabel = new JLabel("  Doğum Tarihi:");
-                    inputPanel.add(bornDLabel);
-
-                    JTextField bornDField = new JTextField();
-                    inputPanel.add(bornDField);
-
-                    JLabel ageLabel = new JLabel("  Yaş:");
+                    JLabel ageLabel = new JLabel("  Age:");
                     inputPanel.add(ageLabel);
 
                     JTextField ageField = new JTextField();
                     inputPanel.add(ageField);
 
-                    JLabel aboutLabel = new JLabel("  Hakkında:");
+                    JLabel bornDLabel = new JLabel("  Born Date:");
+                    inputPanel.add(bornDLabel);
+
+                    JTextField bornDField = new JTextField();
+                    inputPanel.add(bornDField);
+
+                    JLabel aboutLabel = new JLabel("  About:");
                     inputPanel.add(aboutLabel);
 
                     JTextField aboutField = new JTextField();
                     inputPanel.add(aboutField);
 
-                    JLabel genderLabel = new JLabel("  Cinsiyet:");
+                    JLabel genderLabel = new JLabel("  Gender:");
                     inputPanel.add(genderLabel);
 
                     JTextField genderField = new JTextField();
                     inputPanel.add(genderField);
 
-                    JButton motherButton = new JButton("Anne olarak ekle");
-                    inputPanel.add(motherButton);
-
-                    JButton fatherButton = new JButton("Baba olarak ekle");
-                    inputPanel.add(fatherButton);
-
-                    JButton childButton = new JButton("Evlat olarak ekle");
+                    JButton childButton = new JButton("Add as a child");
                     inputPanel.add(childButton);
 
-                    JButton partnerButton = new JButton("Eş olarak ekle");
+                    JButton partnerButton = new JButton("Add as a partner");
                     inputPanel.add(partnerButton);
+
+                    JButton editButton = new JButton("Edit selected member");
+                    inputPanel.add(editButton);
+
+                    JButton confirmButton = new JButton("Confirm the tree");
+                    inputPanel.add(confirmButton);
 
                     inputPanel.setLayout(new GridLayout(8, 2));
 
-                    motherButton.addActionListener(new ActionListener() {
+                    editButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             String name = nameField.getText();
                             String surname = surnameField.getText();
+                            int age = 0;
+                            if(!ageField.getText().equals("")) {
+                                age = parseInt(ageField.getText());
+                            }
                             String bornDate = bornDField.getText();
-                            int age = parseInt(ageField.getText());
                             String aboutPerson = aboutField.getText();
                             String gender = genderField.getText();
-                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
-                            currentPersonOnVisualiser.setMother(newMember);
+
+                            if(!name.equals("")){
+                                currentPersonOnVisualiser.setName(name);
+                            }
+                            if(!surname.equals("")){
+                                currentPersonOnVisualiser.setSurname(surname);
+                            }
+                            if(age != 0){
+                                currentPersonOnVisualiser.setAge(age);
+                            }
+                            if(!gender.equals("")){
+                                currentPersonOnVisualiser.setGender(gender);
+                            }
+                            if(!bornDate.equals("")){
+                                currentPersonOnVisualiser.setBornDate(bornDate);
+                            }
+                            if(!aboutPerson.equals("")){
+                                currentPersonOnVisualiser.setAbout(aboutPerson);
+                            }
+
                             newCreatedTree.jTreeCreator(selectedNode, null);
                             tree.updateUI();
+                            System.out.println(currentPersonOnVisualiser.getName());
                         }
                     });
 
-                    fatherButton.addActionListener(new ActionListener() {
+                    confirmButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            String name = nameField.getText();
-                            String surname = surnameField.getText();
-                            String bornDate = bornDField.getText();
-                            int age = parseInt(ageField.getText());
-                            String aboutPerson = aboutField.getText();
-                            String gender = genderField.getText();
-                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
-                            currentPersonOnVisualiser.setFather(newMember);
-                            newCreatedTree.jTreeCreator(selectedNode, null);
-                            tree.updateUI();
+                            JFileChooser newFileChooser = new JFileChooser();
+                            newFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                            newFileChooser.setDialogTitle("Please select a directory to create.");
+                            newFileChooser.setCurrentDirectory(new File(Modification.rootDirectoryPath));
+
+                            if (newFileChooser.showOpenDialog(confirmButton) == JFileChooser.APPROVE_OPTION){
+                                try {
+                                    pushTree(newCreatedTree, newFileChooser.getSelectedFile().getAbsolutePath());
+                                }
+                                catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
                         }
                     });
 
@@ -253,14 +271,15 @@ public class Modification {
                             int age = parseInt(ageField.getText());
                             String aboutPerson = aboutField.getText();
                             String gender = genderField.getText();
-                            Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
-                            try {
+
+                            if(currentPersonOnVisualiser!=null) {
+                                Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                                 currentPersonOnVisualiser.setChildren(newMember);
                                 newCreatedTree.jTreeCreator(selectedNode, null);
                                 tree.updateUI();
                             }
-                            catch(Exception notSelected) {
-                                JOptionPane.showMessageDialog(null, "Lütfen eklemek için bir aile bireyi seçiniz.");
+                            else{
+                                JOptionPane.showMessageDialog(null, "Please select a member to add.");
                             }
                         }
                     });
@@ -287,7 +306,7 @@ public class Modification {
                 }
 
                 catch (Exception nonIntInput){
-                    JOptionPane.showMessageDialog(null, "Lütfen yaşınız için uygun bir sayı giriniz.");
+                    JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
                 }
             }
         });
