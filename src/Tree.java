@@ -1,11 +1,10 @@
 import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Tree implements Serializable {
     @Serial
@@ -14,6 +13,7 @@ public class Tree implements Serializable {
     private Person headNode = new Person();
     private ArrayList<Person> members = new ArrayList<Person>();
     private String about;
+    private static HashSet<Person> displayedMembers = new HashSet<Person>();
 
     Tree() {
         setFamilyName("Unknown");
@@ -44,7 +44,6 @@ public class Tree implements Serializable {
     public String getAbout() { return about; }
 
     public void jTreeDisplayer(JFrame frame, int width, int height){
-
         JFrame newFrame = new JFrame();
         newFrame.pack();
         newFrame.setSize(1366, 720);
@@ -56,7 +55,7 @@ public class Tree implements Serializable {
 
         JPanel treePanel = new JPanel();
         JPanel infoPanel = new JPanel();
-        JPanel menupanel = new JPanel();
+        JPanel menuPanel = new JPanel();
 
         JSplitPane sl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, infoPanel,treePanel);
 
@@ -64,9 +63,9 @@ public class Tree implements Serializable {
 
         newFrame.add(sl);
 
-        Main.menuBar(newFrame,menupanel, 1100);
+        Main.menuBar(newFrame,menuPanel, 1100);
 
-        infoPanel.add(menupanel);
+        infoPanel.add(menuPanel);
         infoPanel.setLayout(new GridLayout(9,1));
         JLabel nameLabel = new JLabel(" Name:");
         infoPanel.add(nameLabel);
@@ -90,25 +89,26 @@ public class Tree implements Serializable {
 
         JTree jtree = new javax.swing.JTree(rootNode);
 
-        jTreeOpener(rootNode, null);
+        jTreeOpener(rootNode);
 
         treePanel.add(jtree);
 
         newFrame.setVisible(true);
     }
 
-    public void jTreeOpener(DefaultMutableTreeNode rootNode, DefaultMutableTreeNode childNode){
-        Modification.displayedNodes.clear();
+    public void jTreeOpener(DefaultMutableTreeNode rootNode){
+        DefaultMutableTreeNode childNode;
 
         if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
             return; // last child needs to abort
         }
 
         for(Person child : getHeadNode().getRelation().getChildren()) {
-            if (!Modification.displayedNodes.contains(child)){
+            if (!displayedMembers.contains(child)){
                 childNode = new DefaultMutableTreeNode(child.getId());
                 rootNode.add(childNode);
-                Modification.displayedNodes.add(child);
+                displayedMembers.add(child);
+                jTreeOpener(childNode);
             }
         }
     }
@@ -132,7 +132,6 @@ public class Tree implements Serializable {
     }
 
     public void jTreeCreator(DefaultMutableTreeNode root, DefaultMutableTreeNode childNode){
-
         if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
             return; // last child needs to abort
         }

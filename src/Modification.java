@@ -327,16 +327,16 @@ public class Modification {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 try {
-                                    int age = 0;
-                                    String name = nameField.getText();
-                                    String surname = surnameField.getText();
-                                    String bornDate = bornDField.getText();
-
-                                    if (ageField.getText().equals("")) {
-                                        age = parseInt(ageField.getText());
-                                    }
 
                                     if(currentPersonOnVisualiser != null) {
+                                        int age = 0;
+                                        String name = nameField.getText();
+                                        String surname = surnameField.getText();
+                                        String bornDate = bornDField.getText();
+                                        if (ageField.getText().equals("")) {
+                                            age = parseInt(ageField.getText());
+                                        }
+
                                         String aboutPerson = nameField.getText();
                                         String gender = nameField.getText();
                                         Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
@@ -358,8 +358,6 @@ public class Modification {
                                     JOptionPane.showMessageDialog(null, "Please enter valid data.");
 
                                 }
-
-
                             }
                         });
 
@@ -373,7 +371,7 @@ public class Modification {
                 }
 
                 else{
-                    JOptionPane.showMessageDialog(null, "Please enter 'Female' or 'Male' at gender field.");
+                    JOptionPane.showMessageDialog(null, "Please enter valid data.");
                 }
             }
         });

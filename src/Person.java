@@ -1,6 +1,5 @@
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Person implements Serializable {
     @Serial
