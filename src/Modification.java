@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
@@ -149,6 +151,20 @@ public class Modification {
                     treePanel.setLayout(new FlowLayout());
 
                     JTree tree = newCreatedTree.jTreeVisualiser();
+                    tree.addTreeSelectionListener(new TreeSelectionListener() {
+                        @Override
+                        public void valueChanged(TreeSelectionEvent e) {
+                            selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                            String currentPersonID = selectedNode.getUserObject().toString();
+                            for(int x = 0; x < newCreatedTree.getMembers().size(); x++){
+                                if(newCreatedTree.getMembers().get(x).getId().equals(currentPersonID)){
+                                    currentPersonOnVisualiser = newCreatedTree.getMembers().get(x);
+                                    break;
+                                }
+                            }
+                        }
+                    });
+
                     treePanel.add(tree);
 
                     frame.add(treePanel);
@@ -237,9 +253,15 @@ public class Modification {
                                 currentPersonOnVisualiser.setAbout(aboutPerson);
                             }
 
-                            newCreatedTree.jTreeCreator(selectedNode, null);
+                            currentPersonOnVisualiser.setId(name + " " +  surname + " - " + currentPersonOnVisualiser.getId().split(" - ")[1]);
+
+                            selectedNode.setUserObject(currentPersonOnVisualiser.getId());
+
+                            // newCreatedTree.jTreeCreator(selectedNode, null);
                             tree.updateUI();
+
                             System.out.println(currentPersonOnVisualiser.getName());
+                            System.out.println(currentPersonOnVisualiser.getId());
                         }
                     });
 
@@ -278,6 +300,7 @@ public class Modification {
                             if(currentPersonOnVisualiser!=null) {
                                 Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                                 currentPersonOnVisualiser.setChildren(newMember);
+                                newCreatedTree.setMembers(newMember);
                                 if(currentPersonOnVisualiser.getGender().equals("Female")) {
                                     newMember.setMother(currentPersonOnVisualiser);
                                 }
@@ -304,6 +327,7 @@ public class Modification {
                             String gender = nameField.getText();
                             Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                             currentPersonOnVisualiser.setPartner(newMember);
+                            newCreatedTree.setMembers(newMember);
                             newCreatedTree.jTreeCreator(selectedNode, null);
                             tree.updateUI();
                         }

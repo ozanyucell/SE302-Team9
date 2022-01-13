@@ -113,19 +113,6 @@ public class Tree implements Serializable {
 
         jTreeCreator(rootNode, null);
 
-        jtree.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
-                Modification.selectedNode = (DefaultMutableTreeNode) jtree.getLastSelectedPathComponent();
-                String currentPersonID = Modification.selectedNode.getUserObject().toString();
-                for(int x = 0; x < Modification.newCreatedTree.getMembers().size(); x++){
-                    if(Modification.newCreatedTree.getMembers().get(x).getId().equals(currentPersonID)){
-                        Modification.currentPersonOnVisualiser = Modification.newCreatedTree.getMembers().get(x);
-                    }
-                }
-            }
-        });
-
         return jtree;
     }
 
