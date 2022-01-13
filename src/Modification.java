@@ -101,11 +101,6 @@ public class Modification {
         JTextField bornDField = new JTextField();
         panel.add(bornDField);
 
-        JLabel ageLabel = new JLabel("Age:");
-        panel.add(ageLabel);
-        JTextField ageField = new JTextField();
-        panel.add(ageField);
-
         JLabel aboutLabel = new JLabel("About:");
         panel.add(aboutLabel);
         JTextField aboutField = new JTextField();
@@ -129,7 +124,6 @@ public class Modification {
                     familyName = textField.getText();
                     String about = textField2.getText();
                     String headName, headSurname, headGender, headBornDate, headAbout;
-                    int headAge;
                     headName = nameField.getText();
                     headSurname = surnameField.getText();
                     headGender = genderField.getText();
@@ -137,8 +131,7 @@ public class Modification {
                     headAbout = aboutField.getText();
 
                     try {
-                        headAge = parseInt(ageField.getText());
-                        Person headNode = new Person(headName, headSurname, headAge, headGender, headBornDate, headAbout);
+                        Person headNode = new Person(headName, headSurname, headGender, headBornDate, headAbout);
                         newCreatedTree = new Tree(familyName, about, headNode);
 
                         JFrame frame = new JFrame();
@@ -186,12 +179,6 @@ public class Modification {
                         JTextField surnameField = new JTextField();
                         inputPanel.add(surnameField);
 
-                        JLabel ageLabel = new JLabel("  Age:");
-                        inputPanel.add(ageLabel);
-
-                        JTextField ageField = new JTextField();
-                        inputPanel.add(ageField);
-
                         JLabel bornDLabel = new JLabel("  Born Date:");
                         inputPanel.add(bornDLabel);
 
@@ -229,10 +216,6 @@ public class Modification {
                             public void actionPerformed(ActionEvent e) {
                                 String name = nameField.getText();
                                 String surname = surnameField.getText();
-                                int age = 0;
-                                if (!ageField.getText().equals("")) {
-                                    age = parseInt(ageField.getText());
-                                }
                                 String bornDate = bornDField.getText();
                                 String aboutPerson = aboutField.getText();
                                 String gender = genderField.getText();
@@ -243,9 +226,7 @@ public class Modification {
                                 if (!surname.equals("")) {
                                     currentPersonOnVisualiser.setSurname(surname);
                                 }
-                                if (age != 0) {
-                                    currentPersonOnVisualiser.setAge(age);
-                                }
+
                                 if (!gender.equals("")) {
                                     currentPersonOnVisualiser.setGender(gender);
                                 }
@@ -290,18 +271,14 @@ public class Modification {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 try {
-                                    int age = 0;
                                     String name = nameField.getText();
                                     String surname = surnameField.getText();
                                     String bornDate = bornDField.getText();
-                                    if (ageField.getText().equals("")) {
-                                        age = parseInt(ageField.getText());
-                                    }
                                     String aboutPerson = aboutField.getText();
                                     String gender = genderField.getText();
 
                                     if (currentPersonOnVisualiser != null) {
-                                        Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                                        Person newMember = new Person(name, surname, gender, bornDate, aboutPerson);
                                         currentPersonOnVisualiser.setChildren(newMember);
                                         newCreatedTree.setMembers(newMember);
                                         if (currentPersonOnVisualiser.getGender().equals("Female")) {
@@ -331,17 +308,15 @@ public class Modification {
                             public void actionPerformed(ActionEvent e) {
                                 try {
                                     if(currentPersonOnVisualiser != null) {
-                                        int age = 0;
+
                                         String name = nameField.getText();
                                         String surname = surnameField.getText();
                                         String bornDate = bornDField.getText();
-                                        if (ageField.getText().equals("")) {
-                                            age = parseInt(ageField.getText());
-                                        }
+
 
                                         String aboutPerson = nameField.getText();
                                         String gender = nameField.getText();
-                                        Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                                        Person newMember = new Person(name, surname, gender, bornDate, aboutPerson);
                                         currentPersonOnVisualiser.setPartner(newMember);
                                         newCreatedTree.setMembers(newMember);
                                         newMember.setPartner(currentPersonOnVisualiser);
@@ -368,7 +343,7 @@ public class Modification {
                         frame.setVisible(true);
                     }
                     catch (Exception nonIntInput) {
-                        JOptionPane.showMessageDialog(null, "Please enter a valid number for age.");
+                        JOptionPane.showMessageDialog(null, "Please enter valid data.");
                     }
                 }
 

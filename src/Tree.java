@@ -76,17 +76,14 @@ public class Tree implements Serializable {
         JLabel surnameLabel = new JLabel("  Surname:");
         infoPanel.add(surnameLabel);
 
-        JLabel ageLabel = new JLabel("  Age:");
-        infoPanel.add(ageLabel);
-
         JLabel bornDLabel = new JLabel("  Born Date:");
         infoPanel.add(bornDLabel);
 
-        JLabel aboutLabel = new JLabel("  About:");
-        infoPanel.add(aboutLabel);
-
         JLabel genderLabel = new JLabel("  Gender:");
         infoPanel.add(genderLabel);
+
+        JLabel aboutLabel = new JLabel("  About:");
+        infoPanel.add(aboutLabel);
 
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getId());
 
@@ -111,10 +108,30 @@ public class Tree implements Serializable {
                 assert currentPersonOnVisualiser != null;
                 nameLabel.setText("  Name: " + currentPersonOnVisualiser.getName());
                 surnameLabel.setText("  Surname: " + currentPersonOnVisualiser.getSurname());
-                ageLabel.setText("  Age: " + currentPersonOnVisualiser.getAge());
                 bornDLabel.setText("  Born Date: " + currentPersonOnVisualiser.getBornDate());
-                aboutLabel.setText("  About: " + currentPersonOnVisualiser.getAbout());
                 genderLabel.setText("  Gender: " + currentPersonOnVisualiser.getGender());
+                aboutLabel.setText("  About: " + currentPersonOnVisualiser.getAbout());
+            }
+        });
+
+        spouseTree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) spouseTree.getLastSelectedPathComponent();
+                String currentPersonID = selectedNode.getUserObject().toString().split(" \\(")[0];
+                Person currentPersonOnVisualiser = null;
+                for (int x = 0; x < getMembers().size(); x++) {
+                    if (getMembers().get(x).getId().equals(currentPersonID)) {
+                        currentPersonOnVisualiser = getMembers().get(x);
+                        break;
+                    }
+                }
+                assert currentPersonOnVisualiser != null;
+                nameLabel.setText("  Name: " + currentPersonOnVisualiser.getName());
+                surnameLabel.setText("  Surname: " + currentPersonOnVisualiser.getSurname());
+                bornDLabel.setText("  Born Date: " + currentPersonOnVisualiser.getBornDate());
+                genderLabel.setText("  Gender: " + currentPersonOnVisualiser.getGender());
+                aboutLabel.setText("  About: " + currentPersonOnVisualiser.getAbout());
             }
         });
 

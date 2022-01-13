@@ -7,7 +7,6 @@ public class Person implements Serializable {
     private String id;
     private String name;
     private String surname;
-    private int age;
     private String gender;
     private String bornDate;
     private String about;
@@ -16,16 +15,14 @@ public class Person implements Serializable {
     Person() {
         setName("Unknown");
         setSurname("Unknown");
-        setAge(0);
         setGender("Unknown");
         setBornDate("Unknown");
         setAbout("No information.");
     }
 
-    Person(String name, String surname, int age, String gender, String bornDate, String about){
+    Person(String name, String surname, String gender, String bornDate, String about){
         setName(name);
         setSurname(surname);
-        setAge(age);
         setGender(gender);
         setBornDate(bornDate);
         setAbout(about);
@@ -40,8 +37,6 @@ public class Person implements Serializable {
 
     public void setSurname(String surname) { this.surname = surname; }
 
-    public void setAge(int age) { this.age = age; }
-
     public void setGender(String gender) { this.gender = gender; }
 
     public void setBornDate(String bornDate) { this.bornDate = bornDate; }
@@ -55,9 +50,11 @@ public class Person implements Serializable {
     public void setFather(Person father) {
         relation.setFather(father);
     }
+
     public void setPartner(Person partner) {
         relation.setPartner(partner);
     }
+
     public void setChildren(Person children) {
         relation.setChildren(children);
     }
@@ -68,8 +65,6 @@ public class Person implements Serializable {
 
     public String getSurname() { return surname; }
 
-    public int getAge() { return age; }
-
     public String getGender() { return gender; }
 
     public String getBornDate() { return bornDate; }
@@ -77,16 +72,4 @@ public class Person implements Serializable {
     public String getAbout() { return about; }
 
     public Relation getRelation() { return relation; }
-
-    //for testing
-    public void printPerson(){
-        System.out.println("-----------------------------");
-        System.out.println("İsim: " + getName());
-        System.out.println("Soyisim: " + getSurname());
-        System.out.println("Yaş: " + getAge());
-        System.out.println("Cinsiyet: " + getGender());
-        System.out.println("Doğum Tarihi: " + getBornDate());
-        System.out.println("\nHakkında\n" + getAbout());
-        System.out.println("-----------------------------");
-    }
 }
