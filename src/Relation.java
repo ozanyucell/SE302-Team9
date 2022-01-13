@@ -22,6 +22,10 @@ public class Relation implements Serializable {
 
     public void setChildren(Person children) { this.children.add(children); }
 
+    public void setChildrenArray(ArrayList<Person> childrenArray) {
+        this.children.addAll(childrenArray);
+    }
+
     public Person getMother() { return mother; }
 
     public Person getFather() { return father; }

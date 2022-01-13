@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import static java.lang.Integer.parseInt;
@@ -19,6 +20,7 @@ public class Modification {
     public static Person currentPersonOnVisualiser;
     public static DefaultMutableTreeNode selectedNode;
     public static HashSet<Person> displayedNodes = new HashSet<Person>();
+    public static ArrayList<JTree> spouseTrees = new ArrayList<JTree>();
 
     public static void startup() throws IOException {
         File directory = new File(rootDirectoryPath);
@@ -257,11 +259,7 @@ public class Modification {
 
                                 selectedNode.setUserObject(currentPersonOnVisualiser.getId());
 
-                                // newCreatedTree.jTreeCreator(selectedNode, null);
                                 tree.updateUI();
-
-                                System.out.println(currentPersonOnVisualiser.getName());
-                                System.out.println(currentPersonOnVisualiser.getId());
                             }
                         });
 
@@ -289,26 +287,36 @@ public class Modification {
                         childButton.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                String name = nameField.getText();
-                                String surname = surnameField.getText();
-                                String bornDate = bornDField.getText();
-                                int age = parseInt(ageField.getText());
-                                String aboutPerson = aboutField.getText();
-                                String gender = genderField.getText();
-
-                                if (currentPersonOnVisualiser != null) {
-                                    Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
-                                    currentPersonOnVisualiser.setChildren(newMember);
-                                    newCreatedTree.setMembers(newMember);
-                                    if (currentPersonOnVisualiser.getGender().equals("Female")) {
-                                        newMember.setMother(currentPersonOnVisualiser);
-                                    } else if (currentPersonOnVisualiser.getGender().equals("Male")) {
-                                        newMember.setFather(currentPersonOnVisualiser);
+                                try {
+                                    int age = 0;
+                                    String name = nameField.getText();
+                                    String surname = surnameField.getText();
+                                    String bornDate = bornDField.getText();
+                                    if (ageField.getText().equals("")) {
+                                        age = parseInt(ageField.getText());
                                     }
-                                    newCreatedTree.jTreeCreator(selectedNode, null);
-                                    tree.updateUI();
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Please select a member to add.");
+                                    String aboutPerson = aboutField.getText();
+                                    String gender = genderField.getText();
+
+                                    if (currentPersonOnVisualiser != null) {
+                                        Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                                        currentPersonOnVisualiser.setChildren(newMember);
+                                        newCreatedTree.setMembers(newMember);
+                                        if (currentPersonOnVisualiser.getGender().equals("Female")) {
+                                            newMember.setMother(currentPersonOnVisualiser);
+                                        }
+                                        else if (currentPersonOnVisualiser.getGender().equals("Male")) {
+                                            newMember.setFather(currentPersonOnVisualiser);
+                                        }
+                                        newCreatedTree.jTreeCreator(selectedNode, null);
+                                        tree.updateUI();
+                                    }
+                                    else {
+                                        JOptionPane.showMessageDialog(null, "Please select a member to add.");
+                                    }
+                                }
+                                catch(Exception bruh){
+                                    JOptionPane.showMessageDialog(null, "Please enter valid data.");
                                 }
                             }
                         });
@@ -316,17 +324,39 @@ public class Modification {
                         partnerButton.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                String name = nameField.getText();
-                                String surname = nameField.getText();
-                                String bornDate = nameField.getText();
-                                int age = parseInt(nameField.getText());
-                                String aboutPerson = nameField.getText();
-                                String gender = nameField.getText();
-                                Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
-                                currentPersonOnVisualiser.setPartner(newMember);
-                                newCreatedTree.setMembers(newMember);
-                                newCreatedTree.jTreeCreator(selectedNode, null);
-                                tree.updateUI();
+                                try {
+                                    int age = 0;
+                                    String name = nameField.getText();
+                                    String surname = surnameField.getText();
+                                    String bornDate = bornDField.getText();
+
+                                    if (ageField.getText().equals("")) {
+                                        age = parseInt(ageField.getText());
+                                    }
+
+                                    if(currentPersonOnVisualiser != null) {
+                                        String aboutPerson = nameField.getText();
+                                        String gender = nameField.getText();
+                                        Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
+                                        currentPersonOnVisualiser.setPartner(newMember);
+                                        newCreatedTree.setMembers(newMember);
+                                        newMember.setPartner(currentPersonOnVisualiser);
+                                        newMember.getRelation().setChildrenArray(currentPersonOnVisualiser.getRelation().getChildren());
+                                        Tree spouseTree = new Tree();
+                                        JTree spouseJTree = spouseTree.jTreeVisualiser();
+                                        treePanel.add(spouseJTree);
+                                        spouseTrees.add(spouseJTree);
+                                        tree.updateUI();
+                                    }
+
+                                    else {
+                                        JOptionPane.showMessageDialog(null, "Please select a member to add.");
+                                    }
+                                }
+
+                                catch(Exception bruh){
+                                    JOptionPane.showMessageDialog(null, "Please enter valid data.");
+                                }
                             }
                         });
 
