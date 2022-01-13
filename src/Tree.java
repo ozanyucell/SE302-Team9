@@ -77,18 +77,21 @@ public class Tree implements Serializable {
     }
 
     public void jTreeDisplayer(JFrame frame, int width, int height){
+
         JFrame newFrame = new JFrame();
         newFrame.pack();
         newFrame.setSize(width, height);
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         newFrame.setVisible(true);
         newFrame.setLayout(new FlowLayout());
-        newFrame.setTitle("Ağaç Görüntüleyici");
+        newFrame.setTitle("Tree Displayer");
+
+        Main.menuBar(newFrame, width);
 
         frame.setVisible(false);
         frame.dispose();
 
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode());
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getName() + " " + getHeadNode().getSurname());
 
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
@@ -100,8 +103,16 @@ public class Tree implements Serializable {
         newFrame.setVisible(true);
     }
 
-    public JTree jTreeVisualiser(){
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getId());
+    public JTree jTreeVisualiser(Person headNode, boolean inputIsPartner){
+        DefaultMutableTreeNode rootNode;
+        if(!inputIsPartner) {
+            rootNode = new DefaultMutableTreeNode(headNode.getId());
+        }
+        else{
+            rootNode = new DefaultMutableTreeNode(headNode.getId() + " (Spouse of " +
+                    headNode.getRelation().getPartner().getName() + ")");
+        }
+
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
 

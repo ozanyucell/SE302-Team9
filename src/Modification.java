@@ -19,6 +19,7 @@ public class Modification {
     public static int publicMemberID = 1;
     public static Person currentPersonOnVisualiser;
     public static DefaultMutableTreeNode selectedNode;
+    public static DefaultMutableTreeNode selectedPartnerNode;
     public static HashSet<Person> displayedNodes = new HashSet<Person>();
     public static ArrayList<JTree> spouseTrees = new ArrayList<JTree>();
 
@@ -152,7 +153,7 @@ public class Modification {
 
                         treePanel.setLayout(new FlowLayout());
 
-                        JTree tree = newCreatedTree.jTreeVisualiser();
+                        JTree tree = newCreatedTree.jTreeVisualiser(newCreatedTree.getHeadNode(), false);
                         tree.addTreeSelectionListener(new TreeSelectionListener() {
                             @Override
                             public void valueChanged(TreeSelectionEvent e) {
@@ -277,7 +278,8 @@ public class Modification {
                                         frame.dispose();
                                         JOptionPane.showMessageDialog(null, "Tree has successfully been saved.");
                                         Main.mainGUI();
-                                    } catch (IOException ex) {
+                                    }
+                                    catch (IOException ex) {
                                         ex.printStackTrace();
                                     }
                                 }
@@ -342,10 +344,8 @@ public class Modification {
                                         newCreatedTree.setMembers(newMember);
                                         newMember.setPartner(currentPersonOnVisualiser);
                                         newMember.getRelation().setChildrenArray(currentPersonOnVisualiser.getRelation().getChildren());
-                                        Tree spouseTree = new Tree();
-                                        JTree spouseJTree = spouseTree.jTreeVisualiser();
+                                        JTree spouseJTree = newCreatedTree.jTreeVisualiser(newMember,true);
                                         treePanel.add(spouseJTree);
-                                        spouseTrees.add(spouseJTree);
                                         tree.updateUI();
                                     }
 
@@ -356,7 +356,10 @@ public class Modification {
 
                                 catch(Exception bruh){
                                     JOptionPane.showMessageDialog(null, "Please enter valid data.");
+
                                 }
+
+
                             }
                         });
 
