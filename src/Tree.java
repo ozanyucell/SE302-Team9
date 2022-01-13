@@ -71,19 +71,26 @@ public class Tree implements Serializable {
 
         infoPanel.add(menuPanel);
         infoPanel.setLayout(new GridLayout(9,1));
-        JLabel nameLabel = new JLabel("  Name:");
+
+        JLabel famNameLabel = new JLabel("  Family Name: " + getFamilyName());
+        infoPanel.add(famNameLabel);
+
+        JLabel famAboutLabel = new JLabel("  About Family: " + getAbout());
+        infoPanel.add(famAboutLabel);
+
+        JLabel nameLabel = new JLabel(" ");
         infoPanel.add(nameLabel);
 
-        JLabel surnameLabel = new JLabel("  Surname:");
+        JLabel surnameLabel = new JLabel(" ");
         infoPanel.add(surnameLabel);
 
-        JLabel bornDLabel = new JLabel("  Born Date:");
+        JLabel bornDLabel = new JLabel(" ");
         infoPanel.add(bornDLabel);
 
-        JLabel genderLabel = new JLabel("  Gender:");
+        JLabel genderLabel = new JLabel(" ");
         infoPanel.add(genderLabel);
 
-        JLabel aboutLabel = new JLabel("  About:");
+        JLabel aboutLabel = new JLabel(" ");
         infoPanel.add(aboutLabel);
 
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(getHeadNode().getId());
