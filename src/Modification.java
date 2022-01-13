@@ -46,7 +46,7 @@ public class Modification {
     public static void createTree(JFrame frame, int width, int height) throws IOException {
         JFrame newFrame = new JFrame();
         newFrame.pack();
-        newFrame.setSize(width, height);
+        newFrame.setSize(340, 540);
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         newFrame.setVisible(true);
         newFrame.setLayout(null);
@@ -253,7 +253,10 @@ public class Modification {
 
                             if (newFileChooser.showOpenDialog(confirmButton) == JFileChooser.APPROVE_OPTION){
                                 try {
-                                    pushTree(newCreatedTree, newFileChooser.getSelectedFile().getAbsolutePath());
+                                    pushTree(newCreatedTree, newFileChooser.getSelectedFile().getAbsolutePath() + "\\"+ familyName + ".tree");
+                                    frame.dispose();
+                                    JOptionPane.showMessageDialog(null, "Tree has successfully been saved.");
+                                    Main.mainGUI();
                                 }
                                 catch (IOException ex) {
                                     ex.printStackTrace();
@@ -275,10 +278,16 @@ public class Modification {
                             if(currentPersonOnVisualiser!=null) {
                                 Person newMember = new Person(name, surname, age, gender, bornDate, aboutPerson);
                                 currentPersonOnVisualiser.setChildren(newMember);
+                                if(currentPersonOnVisualiser.getGender().equals("Female")) {
+                                    newMember.setMother(currentPersonOnVisualiser);
+                                }
+                                else if (currentPersonOnVisualiser.getGender().equals("Male")) {
+                                    newMember.setFather(currentPersonOnVisualiser);
+                                }
                                 newCreatedTree.jTreeCreator(selectedNode, null);
                                 tree.updateUI();
                             }
-                            else{
+                            else {
                                 JOptionPane.showMessageDialog(null, "Please select a member to add.");
                             }
                         }
