@@ -52,6 +52,7 @@ public class Tree implements Serializable {
         newFrame.setSize(1366, 720);
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         newFrame.setTitle("Open Tree");
+        newFrame.setLocationRelativeTo(null);
 
         frame.setVisible(false);
         frame.dispose();

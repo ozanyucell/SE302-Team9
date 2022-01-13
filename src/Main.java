@@ -24,10 +24,13 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
 
         menuBar(frame, panel, width);
+
+        panel.setBounds(0,0, width,30);
 
         frame.add(panel);
 
@@ -85,6 +88,9 @@ public class Main {
         JMenuItem gitHubLink = new JMenuItem("GitHub");
         menuButton2.add(gitHubLink);
 
+        JMenuItem helpLink = new JMenuItem("Help File");
+        menuButton2.add(helpLink);
+
         openBarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,6 +130,17 @@ public class Main {
             }
         });
 
+        helpLink.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/ozanyucell/SE302-Team9/blob/main/Documents/Help%20-%20Family%20Tree%20Generator.pdf").toURI());
+                }
+                catch (Exception a) {
+                    a.printStackTrace();
+                }
+            }
+        });
     }
 
     public static void openTreeConnector(JFrame frame, JButton button, JMenuItem menuItem, int width, int height){

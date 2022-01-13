@@ -56,6 +56,7 @@ public class Modification {
         newFrame.setVisible(true);
         newFrame.setLayout(null);
         newFrame.setTitle("Create Tree");
+        newFrame.setLocationRelativeTo(null);
         frame.setVisible(false);
         frame.dispose();
         JTextField textField;
@@ -139,6 +140,8 @@ public class Modification {
                         frame.setSize(1366, 720);
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         frame.setTitle(familyName);
+                        frame.setLocationRelativeTo(null);
+
                         newFrame.setVisible(false);
 
                         JPanel inputPanel = new JPanel();
