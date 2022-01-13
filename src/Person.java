@@ -82,12 +82,12 @@ public class Person implements Serializable {
     //for testing
     public void printPerson(){
         System.out.println("-----------------------------");
-        System.out.println("Name: " + getName());
-        System.out.println("Surname: " + getSurname());
-        System.out.println("Age: " + getAge());
-        System.out.println("Gender: " + getGender());
-        System.out.println("Born Date: " + getBornDate());
-        System.out.println("\nAbout\n" + getAbout());
+        System.out.println("İsim: " + getName());
+        System.out.println("Soyisim: " + getSurname());
+        System.out.println("Yaş: " + getAge());
+        System.out.println("Cinsiyet: " + getGender());
+        System.out.println("Doğum Tarihi: " + getBornDate());
+        System.out.println("\nHakkında\n" + getAbout());
         System.out.println("-----------------------------");
     }
 }

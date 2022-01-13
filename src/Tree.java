@@ -46,10 +46,10 @@ public class Tree implements Serializable {
     //for testing
     public void printTree() {
         System.out.println("-----------------------------");
-        System.out.println("Family name: " + getFamilyName());
+        System.out.println("Aile Adı: " + getFamilyName());
         // if(members==null) { System.out.println("This tree is empty!"); }
         // else { System.out.println(getMembers()); }
-        System.out.println("\nAbout\n" + getAbout());
+        System.out.println("\nHakkında\n" + getAbout());
         System.out.println("-----------------------------");
     }
 
@@ -60,18 +60,18 @@ public class Tree implements Serializable {
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         newFrame.setVisible(true);
         newFrame.setLayout(null);
-        newFrame.setTitle("Tree Displayer");
+        newFrame.setTitle("");
 
         frame.setVisible(false);
         frame.dispose();
 
         Main.menuBar(newFrame, width);
 
-        JLabel familyName = new JLabel("Family Name: " + getFamilyName());
+        JLabel familyName = new JLabel("Aile Adı: " + getFamilyName());
         familyName.setBounds(10, 40, width, 15);
         newFrame.add(familyName);
 
-        JLabel about = new JLabel("About Family: " + getAbout());
+        JLabel about = new JLabel("Aile Hakkında: " + getAbout());
         about.setBounds(10, 80, width, 15);
         newFrame.add(about);
 
@@ -89,7 +89,7 @@ public class Tree implements Serializable {
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         newFrame.setVisible(true);
         newFrame.setLayout(new FlowLayout());
-        newFrame.setTitle("Tree Displayer");
+        newFrame.setTitle("Ağaç Görüntüleyici");
 
         frame.setVisible(false);
         frame.dispose();

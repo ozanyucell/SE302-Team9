@@ -20,18 +20,18 @@ public class Main {
         JFrame frame = new JFrame();
         frame.pack();
         frame.setSize(width,height);
-        frame.setTitle("Family Tree Generator");
+        frame.setTitle("Aile Ağacı Oluşturucu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
 
         menuBar(frame, width);
 
-        JButton openButton = new JButton("Open Tree");
+        JButton openButton = new JButton("Aile ağacı aç");
         openButton.setBounds(170,150,200,200);
         frame.add(openButton);
 
-        JButton createButton = new JButton("Create Tree");
+        JButton createButton = new JButton("Aile ağacı oluştur");
         createButton.setBounds(500,150,200,200);
         frame.add(createButton);
 
@@ -62,19 +62,19 @@ public class Main {
         menuBar.setBounds(0, 0, width, 30);
         frame.add(menuBar);
 
-        JMenu menuButton1 = new JMenu("File");
+        JMenu menuButton1 = new JMenu("Dosya");
         menuBar.add(menuButton1);
 
-        JMenu menuButton2 = new JMenu("Help");
+        JMenu menuButton2 = new JMenu("Yardım");
         menuBar.add(menuButton2);
 
-        JMenuItem openBarButton = new JMenuItem("Open");
+        JMenuItem openBarButton = new JMenuItem("Aç");
         menuButton1.add(openBarButton);
 
-        JMenuItem createBarButton = new JMenuItem("Create");
+        JMenuItem createBarButton = new JMenuItem("Oluştur");
         menuButton1.add(createBarButton);
 
-        JMenuItem rootFolder = new JMenuItem("Change root folder");
+        JMenuItem rootFolder = new JMenuItem("Yerel dosyayı değiştirin");
         menuButton1.add(rootFolder);
 
         JMenuItem gitHubLink = new JMenuItem("GitHub");
@@ -92,7 +92,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser folderChooser = new JFileChooser();
                 folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                folderChooser.setDialogTitle("Please select a directory");
+                folderChooser.setDialogTitle("Lütfen bir klasör seçin.");
                 folderChooser.setCurrentDirectory(new File(Modification.rootDirectoryPath));
 
                 if (folderChooser.showOpenDialog(rootFolder) == JFileChooser.APPROVE_OPTION){
@@ -123,7 +123,7 @@ public class Main {
 
     public static void openTreeConnector(JFrame frame, JButton button, JMenuItem menuItem, int width, int height){
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Choose a .tree file");
+        fileChooser.setDialogTitle(".tree uzantılı bir dosya seçin");
         fileChooser.setCurrentDirectory(new File(Modification.rootDirectoryPath));
 
         if(button == null){
@@ -138,7 +138,7 @@ public class Main {
                 }
 
                 else {
-                    JOptionPane.showMessageDialog(frame, "Please select a .tree file.");
+                    JOptionPane.showMessageDialog(frame, "Lütfen uzantısı .tree olan bir dosya seçin.");
                 }
             }
         }
@@ -155,7 +155,7 @@ public class Main {
                 }
 
                 else {
-                    JOptionPane.showMessageDialog(frame, "Please select a .tree file.");
+                    JOptionPane.showMessageDialog(frame, "\"Lütfen uzantısı .tree olan bir dosya seçin.");
                 }
             }
         }
@@ -170,12 +170,12 @@ public class Main {
         createFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createFrame.setVisible(true);
         createFrame.setLayout(null);
-        createFrame.setTitle("Create Tree");
+        createFrame.setTitle("Ağaç oluştur");
         frame.setVisible(false);
         Tree tree = new Tree();
         tree.setFamilyName(fam);
         tree.setAbout(about);
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton("Geri");
         backButton.setBounds(80, 150, 100, 25);
         createFrame.add(backButton);
         backButton.addActionListener(new ActionListener() {
@@ -190,7 +190,7 @@ public class Main {
     {
         frame2.setVisible(false);
         frame1.setVisible(true);
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton("Geri");
         backButton.setBounds(80, 150, 100, 25);
     }
 }
