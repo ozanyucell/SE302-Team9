@@ -180,24 +180,24 @@ public class Tree implements Serializable {
         JTree jtree;
         jtree = new javax.swing.JTree(rootNode);
 
-        jTreeCreator(rootNode);
+        jTreeCreator(rootNode, getHeadNode());
 
         return jtree;
     }
 
-    public void jTreeCreator(DefaultMutableTreeNode root){
+    public void jTreeCreator(DefaultMutableTreeNode root, Person rootPerson){
         DefaultMutableTreeNode childNode;
 
         if (getHeadNode().getRelation() == null || getHeadNode().getRelation().getChildren() == null){
             return; // last child needs to abort
         }
 
-        for(Person child : getHeadNode().getRelation().getChildren()) {
+        for(Person child : rootPerson.getRelation().getChildren()) {
             if (!Modification.displayedNodes.contains(child)){
                 childNode = new DefaultMutableTreeNode(child.getId());
                 root.add(childNode);
                 Modification.displayedNodes.add(child);
-                jTreeCreator(childNode);
+                jTreeCreator(childNode, child);
             }
         }
     }

@@ -291,7 +291,7 @@ public class Modification {
                                             newMember.setFather(currentPersonOnVisualiser);
                                         }
 
-                                        newCreatedTree.jTreeCreator(selectedNode);
+                                        newCreatedTree.jTreeCreator(selectedNode, currentPersonOnVisualiser);
 
                                         tree.updateUI();
                                     }
